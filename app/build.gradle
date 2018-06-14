@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.kotlin_research.kotlinresearch"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    compile 'com.bluelinelabs:conductor:2.1.4'
+    compile 'com.bluelinelabs:conductor-support:2.1.4'
+    compile 'com.bluelinelabs:conductor-rxlifecycle2:2.1.4'
+    compile 'com.bluelinelabs:conductor-autodispose:2.1.4'
+    compile 'com.bluelinelabs:conductor-archlifecycle:0.1.1'
+    compile 'com.hannesdorfmann.mosby3:mvp-conductor:3.1.0'
+    compile 'com.hannesdorfmann.mosby3:viewstate-conductor:3.1.0' // optional viewstate feature
+    compile 'com.hannesdorfmann.mosby3:mvi-conductor:3.1.0' // Model-View-Intent
+    compile 'agency.tango.android:material-intro-screen:0.0.5'
+    compile 'com.android.support:cardview-v7:27.1.1'
+    compile 'com.android.support:recyclerview-v7:27.1.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile "com.google.dagger:dagger:2.10"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.10"
+    provided 'javax.annotation:jsr250-api:1.0'
+    compile 'com.github.bumptech.glide:glide:3.8.0'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.2.1'
+}
