@@ -5,10 +5,13 @@ import com.kotlin_research.kotlinresearch.di.AppComponent
 import com.kotlin_research.kotlinresearch.di.SharedPreferencesModule
 
 class App : Application() {
-    private lateinit var component: AppComponent
 
-    fun getComponent(): AppComponent {
-        return component
+
+    companion object {
+        private lateinit var component: AppComponent
+        fun getComponent(): AppComponent {
+            return component
+        }
     }
 
     override fun onCreate() {

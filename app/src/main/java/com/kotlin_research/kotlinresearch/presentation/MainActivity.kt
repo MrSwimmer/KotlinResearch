@@ -9,6 +9,7 @@ import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.kotlin_research.kotlinresearch.R
+import com.kotlin_research.kotlinresearch.presentation.settings.SettingsController
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +24,11 @@ class MainActivity : AppCompatActivity() {
         ButterKnife.bind(this)
         router = Conductor.attachRouter(this, mainFrameLayout, savedInstanceState)
         if (!router.hasRootController())
-            router.setRoot(RouterTransaction.with())
+            router.setRoot(RouterTransaction.with(SettingsController()))
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }
