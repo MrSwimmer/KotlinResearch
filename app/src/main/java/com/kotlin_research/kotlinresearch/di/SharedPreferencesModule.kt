@@ -8,7 +8,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class SharedPreferencesModule(var context: Context) {
+class SharedPreferencesModule(private var context: Context) {
 
     @Provides
     fun context(): Context {
