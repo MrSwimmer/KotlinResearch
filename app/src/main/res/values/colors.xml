@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="main_red">#d7443c</color>
     <color name="status_bar">#FFB72A22</color>
+    <color name="grey_back">#ececec</color>
+    <color name="grey_text">#848484</color>
 </resources>
