@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.di
+package com.kotlin_research.kotlinresearch.di.modul
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -3,7 +3,7 @@ package com.kotlin_research.kotlinresearch
 import android.app.Application
 import com.kotlin_research.kotlinresearch.di.AppComponent
 import com.kotlin_research.kotlinresearch.di.DaggerAppComponent
-import com.kotlin_research.kotlinresearch.di.SharedPreferencesModule
+import com.kotlin_research.kotlinresearch.di.modul.SharedPreferencesModule
 
 class App : Application() {
 

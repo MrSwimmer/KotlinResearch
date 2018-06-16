@@ -1,5 +1,6 @@
 package com.kotlin_research.kotlinresearch.di
 
+import com.kotlin_research.kotlinresearch.di.modul.SharedPreferencesModule
 import com.kotlin_research.kotlinresearch.presentation.settings.NotesController
 import com.kotlin_research.kotlinresearch.presentation.settings.NotesPresenter
 import com.kotlin_research.kotlinresearch.presentation.settings.SettingsController

@@ -10,4 +10,6 @@
     <color name="yellow">#f0d73c</color>
     <color name="green">#c0e637</color>
     <color name="blue">#55bbeb</color>
+    <color name="green_trans">#aac0e637</color>
+
 </resources>
