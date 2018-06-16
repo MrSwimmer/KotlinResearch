@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.di.modul
+package com.kotlin_research.kotlinresearch.di.module
 
 import android.arch.persistence.room.Room
 import android.content.Context

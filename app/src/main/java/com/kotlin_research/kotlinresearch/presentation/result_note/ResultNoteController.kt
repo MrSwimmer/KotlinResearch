@@ -1,19 +1,18 @@
 package com.kotlin_research.kotlinresearch.presentation.result_note
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import butterknife.BindView
+import android.widget.Toast
 import butterknife.ButterKnife
-import butterknife.OnClick
-import com.bluelinelabs.conductor.RouterTransaction
 import com.hannesdorfmann.mosby3.mvp.conductor.MvpController
-import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
+import com.kotlin_research.kotlinresearch.data.room.Note
+import java.util.logging.Logger
+import kotlin.math.log
 
-class ResultNoteController : MvpController<ResultNoteContract.View, ResultNoteContract.Presenter>(), ResultNoteContract.View {
+class ResultNoteController(val note: Note) : MvpController<ResultNoteContract.View, ResultNoteContract.Presenter>(), ResultNoteContract.View {
 
     /*@BindView(R.id.add_note_pulse_sitting)
     lateinit var pulseSittingField: EditText
@@ -29,8 +28,9 @@ class ResultNoteController : MvpController<ResultNoteContract.View, ResultNoteCo
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
-        var view: View = inflater.inflate(R.layout.controller_result_note, container, false)
+        val view: View = inflater.inflate(R.layout.controller_result_note, container, false)
         ButterKnife.bind(this, view)
+        Log.i("code", note.points.toString())
         //App.getComponent().inject(this)
         return view
     }

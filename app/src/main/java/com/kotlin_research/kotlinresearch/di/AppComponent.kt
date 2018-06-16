@@ -1,6 +1,7 @@
 package com.kotlin_research.kotlinresearch.di
 
-import com.kotlin_research.kotlinresearch.di.modul.SharedPreferencesModule
+import com.kotlin_research.kotlinresearch.di.module.RoomModule
+import com.kotlin_research.kotlinresearch.di.module.SharedPreferencesModule
 import com.kotlin_research.kotlinresearch.presentation.settings.NotesController
 import com.kotlin_research.kotlinresearch.presentation.settings.NotesPresenter
 import com.kotlin_research.kotlinresearch.presentation.settings.SettingsController
@@ -14,7 +15,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [SharedPreferencesModule::class])
+@Component(modules = [SharedPreferencesModule::class, RoomModule::class])
 interface AppComponent {
     fun inject(notesController: NotesController)
     fun inject(notesController: NotesPresenter)
