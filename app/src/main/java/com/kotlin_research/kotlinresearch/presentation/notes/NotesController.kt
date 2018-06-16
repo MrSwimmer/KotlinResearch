@@ -12,7 +12,7 @@ import com.bluelinelabs.conductor.RouterTransaction
 import com.hannesdorfmann.mosby3.mvp.conductor.MvpController
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
-import com.kotlin_research.kotlinresearch.presentation.single_note.SingleNoteController
+import com.kotlin_research.kotlinresearch.presentation.add_note.AddNoteController
 
 class NotesController : MvpController<NotesContract.View, NotesContract.Presenter>(), NotesContract.View {
 
@@ -34,6 +34,6 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
 
     @OnClick(R.id.notes_fab)
     fun onFABClick() {
-        router.pushController(RouterTransaction.with(SingleNoteController()))
+        router.pushController(RouterTransaction.with(AddNoteController()))
     }
 }
