@@ -6,6 +6,7 @@ import android.arch.persistence.room.Query
 import java.util.*
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Update
+import io.reactivex.Flowable
 
 @Dao
 interface NoteDao {
@@ -13,7 +14,7 @@ interface NoteDao {
     fun insert(note: Note)
 
     @Query("SELECT * FROM notes")
-    fun getAll(): List<Note>
+    fun getAll(): Flowable<List<Note>>
 
     @Query("SELECT * FROM notes WHERE id = :id")
     fun getById(id: Long): Note

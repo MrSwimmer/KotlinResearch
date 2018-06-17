@@ -23,7 +23,7 @@ class RoomModule(private var context: Context) {
 
     @Provides
     @Singleton
-    fun dao(appDatabase: AppDatabase): NoteDao {
+    fun provideDao(appDatabase: AppDatabase): NoteDao {
         return appDatabase.noteDao()
     }
 }

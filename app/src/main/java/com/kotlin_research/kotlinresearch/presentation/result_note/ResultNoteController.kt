@@ -12,7 +12,7 @@ import com.kotlin_research.kotlinresearch.data.room.Note
 import java.util.logging.Logger
 import kotlin.math.log
 
-class ResultNoteController(val note: Note) : MvpController<ResultNoteContract.View, ResultNoteContract.Presenter>(), ResultNoteContract.View {
+class ResultNoteController() : MvpController<ResultNoteContract.View, ResultNoteContract.Presenter>(), ResultNoteContract.View {
 
     /*@BindView(R.id.add_note_pulse_sitting)
     lateinit var pulseSittingField: EditText
@@ -22,6 +22,11 @@ class ResultNoteController(val note: Note) : MvpController<ResultNoteContract.Vi
     lateinit var getResultButton: ImageView*/
 
     var afterSleep = false
+    private lateinit var note: Note
+
+    constructor(note: Note) : this() {
+        this.note = note
+    }
 
     override fun createPresenter(): ResultNoteContract.Presenter {
         return ResultNotePresenter()
@@ -30,7 +35,7 @@ class ResultNoteController(val note: Note) : MvpController<ResultNoteContract.Vi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
         val view: View = inflater.inflate(R.layout.controller_result_note, container, false)
         ButterKnife.bind(this, view)
-        Log.i("code", note.points.toString())
+        Log.i("code", "points " + note.points.toString())
         //App.getComponent().inject(this)
         return view
     }
