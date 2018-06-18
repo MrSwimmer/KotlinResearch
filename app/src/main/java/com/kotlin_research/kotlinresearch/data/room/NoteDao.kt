@@ -7,6 +7,7 @@ import java.util.*
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Update
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 @Dao
 interface NoteDao {
@@ -24,4 +25,7 @@ interface NoteDao {
 
     @Update
     fun update(note: Note)
+
+    @Query("SELECT * FROM notes LIMIT :begin, :count")
+    fun getPage(begin: Int, count: Int): Single<List<Note>>
 }

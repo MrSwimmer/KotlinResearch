@@ -8,11 +8,4 @@ import java.util.*
 data class Note(var pulseSitting: String, var pulseStanding: String, var date: Long, var points: Double, var zone: Int, var afterSleep: Boolean) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-
-    /*lateinit var pulseSitting: String
-    lateinit var pulseStanding: String
-    var date = 0
-    var points = 0.0
-    var zone = 0
-    var afterSleep = false*/
 }

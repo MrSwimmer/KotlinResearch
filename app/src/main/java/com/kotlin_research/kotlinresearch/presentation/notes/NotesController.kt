@@ -41,6 +41,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
         super.onAttach(view)
         Log.i("code", "attach")
         presenter.setRecyclerData()
+        presenter.setPagingRecyclerData()
     }
 
     @OnClick(R.id.notes_fab)

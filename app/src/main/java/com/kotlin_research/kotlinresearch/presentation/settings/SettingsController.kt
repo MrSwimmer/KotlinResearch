@@ -15,7 +15,7 @@ class SettingsController : MvpController<SettingsContract.View, SettingsContract
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
-        var view: View = inflater.inflate(R.layout.controller_settings, container, false)
+        val view: View = inflater.inflate(R.layout.controller_settings, container, false)
         ButterKnife.bind(this, view)
         App.getComponent().inject(this)
         return view
