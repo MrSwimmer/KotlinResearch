@@ -8,7 +8,7 @@ import com.hannesdorfmann.mosby3.mvp.conductor.MvpController
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
 
-class SettingsController : MvpController<SettingsContract.View, SettingsContract.Presenter>(), NotesContract.View {
+class SettingsController : MvpController<SettingsContract.View, SettingsContract.Presenter>(), SettingsContract.View {
 
     override fun createPresenter(): SettingsContract.Presenter {
         return SettingsPresenter()

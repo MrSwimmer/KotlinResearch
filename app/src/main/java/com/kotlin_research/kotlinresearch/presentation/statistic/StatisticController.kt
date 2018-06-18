@@ -10,10 +10,10 @@ import com.kotlin_research.kotlinresearch.R
 import com.kotlin_research.kotlinresearch.presentation.settings.NotesContract
 import com.kotlin_research.kotlinresearch.presentation.settings.NotesPresenter
 
-class StatisticController : MvpController<NotesContract.View, NotesContract.Presenter>(), NotesContract.View {
+class StatisticController : MvpController<StatisticContract.View, StatisticContract.Presenter>(), StatisticContract.View {
 
-    override fun createPresenter(): NotesContract.Presenter {
-        return NotesPresenter()
+    override fun createPresenter(): StatisticContract.Presenter {
+        return StatisticPresenter()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
