@@ -21,9 +21,6 @@ import java.util.concurrent.Executors
 
 class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Presenter {
 
-    @Inject
-    lateinit var db: NoteDao
-
     init {
         App.getComponent().inject(this)
     }
@@ -36,12 +33,9 @@ class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Pre
         val pagedList = PagedList.Builder(NotePositionalDataSource(), config)
                 .setNotifyExecutor(MainThreadExecutor())
                 .setFetchExecutor(Executors.newSingleThreadExecutor())
-                /*.setBackgroundThreadExecutor(Executors.newSingleThreadExecutor())
-                .setMainThreadExecutor(MainThreadExecutor())*/
                 .build()
 
         view.setAdapter(pagedList)
-        //var adapter = NotePagingAdapter(NoteDiffUtilCallback())
     }
 
     class MainThreadExecutor : Executor {

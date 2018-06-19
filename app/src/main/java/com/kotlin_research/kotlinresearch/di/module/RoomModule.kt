@@ -3,7 +3,9 @@ package com.kotlin_research.kotlinresearch.di.module
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.kotlin_research.kotlinresearch.data.room.AppDatabase
+import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.data.room.NoteDao
+import com.kotlin_research.kotlinresearch.domain.RoomService
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -25,5 +27,11 @@ class RoomModule(private var context: Context) {
     @Singleton
     fun provideDao(appDatabase: AppDatabase): NoteDao {
         return appDatabase.noteDao()
+    }
+
+    @Provides
+    @Singleton
+    fun roomService(dao: NoteDao): RoomService {
+        return RoomService(dao)
     }
 }

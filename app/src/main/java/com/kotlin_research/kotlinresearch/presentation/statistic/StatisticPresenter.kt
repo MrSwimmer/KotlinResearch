@@ -4,10 +4,17 @@ import android.graphics.Color
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
+import com.kotlin_research.kotlinresearch.data.room.Note
+import com.kotlin_research.kotlinresearch.domain.RoomService
 import org.eazegraph.lib.models.ValueLinePoint
 import org.eazegraph.lib.models.ValueLineSeries
+import java.util.*
+import javax.inject.Inject
 
 class StatisticPresenter : MvpBasePresenter<StatisticContract.View>(), StatisticContract.Presenter {
+
+    @Inject
+    lateinit var roomService: RoomService
 
     init {
         App.getComponent().inject(this)
@@ -26,5 +33,15 @@ class StatisticPresenter : MvpBasePresenter<StatisticContract.View>(), Statistic
         series.addPoint(ValueLinePoint("8", 2f))
         series.addPoint(ValueLinePoint("9", 1f))
         view.setLineChartData(series)
+
+        val statin = object : RoomService.StatCallback {
+            override fun onSuccess(notes: List<Note>) {
+
+            }
+        }
+
+        roomService.getWeek(Date().time, RoomService.StatCallback {
+
+        })
     }
 }

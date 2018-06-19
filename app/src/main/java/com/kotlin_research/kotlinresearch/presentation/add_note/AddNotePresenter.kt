@@ -2,8 +2,17 @@ package com.kotlin_research.kotlinresearch.presentation.add_note
 
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.kotlin_research.kotlinresearch.App
+import com.kotlin_research.kotlinresearch.data.room.Note
+import com.kotlin_research.kotlinresearch.data.room.NoteDao
+import rx.Observable
+import rx.Subscriber
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
+import javax.inject.Inject
 
 class AddNotePresenter : MvpBasePresenter<AddNoteContract.View>(), AddNoteContract.Presenter {
+    @Inject
+    lateinit var db: NoteDao
 
     init {
         App.getComponent().inject(this)
@@ -28,5 +37,26 @@ class AddNotePresenter : MvpBasePresenter<AddNoteContract.View>(), AddNoteContra
         if (points < 2.5)
             n = 4
         return n
+    }
+
+    override fun addNote(note: Note) {
+        Observable.create(Observable.OnSubscribe<String> { subscriber ->
+            db.insert(note)
+            subscriber.onCompleted()
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Subscriber<String>() {
+                    override fun onNext(t: String?) {
+                    }
+
+                    override fun onCompleted() {
+                        view.gotoResult(note)
+                    }
+
+                    override fun onError(e: Throwable) {
+                    }
+
+                })
     }
 }

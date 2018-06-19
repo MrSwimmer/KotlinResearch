@@ -1,6 +1,5 @@
 package com.kotlin_research.kotlinresearch.presentation.add_note
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,21 +13,10 @@ import com.hannesdorfmann.mosby3.mvp.conductor.MvpController
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
 import com.kotlin_research.kotlinresearch.data.room.Note
-import com.kotlin_research.kotlinresearch.data.room.NoteDao
 import com.kotlin_research.kotlinresearch.presentation.result_note.ResultNoteController
-import rx.Observable
-import rx.Single
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import java.util.*
-import javax.inject.Inject
-
 
 class AddNoteController : MvpController<AddNoteContract.View, AddNoteContract.Presenter>(), AddNoteContract.View {
-
-    @Inject
-    lateinit var db: NoteDao
 
     @BindView(R.id.add_note_pulse_sitting)
     lateinit var pulseSittingField: EditText
@@ -62,27 +50,10 @@ class AddNoteController : MvpController<AddNoteContract.View, AddNoteContract.Pr
     override fun setRes(points: Double, zone: Int) {
         val date = Date()
         val note = Note(pulseSitting, pulseStanding, date.time, points, zone, afterSleep)
-        Observable.create(Observable.OnSubscribe<Note> { subscriber ->
-            Log.i("code", "create")
-            db.insert(note)
-            subscriber.onCompleted()
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Subscriber<Note>() {
-                    override fun onNext(t: Note?) {
+        presenter.addNote(note)
+    }
 
-                    }
-
-                    override fun onCompleted() {
-                        Log.i("code", "complited")
-                        router.replaceTopController(RouterTransaction.with(ResultNoteController(note)))
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.i("code", "error " + e.message)
-                    }
-
-                })
+    override fun gotoResult(note: Note) {
+        router.replaceTopController(RouterTransaction.with(ResultNoteController(note)))
     }
 }
