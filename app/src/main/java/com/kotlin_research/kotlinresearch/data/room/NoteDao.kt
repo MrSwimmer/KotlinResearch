@@ -28,4 +28,7 @@ interface NoteDao {
 
     @Query("SELECT * FROM notes LIMIT :begin, :count")
     fun getPage(begin: Int, count: Int): Single<List<Note>>
+
+    @Query("SELECT * FROM notes LIMIT :count")
+    fun getFirstPage(count: Int): Single<List<Note>>
 }

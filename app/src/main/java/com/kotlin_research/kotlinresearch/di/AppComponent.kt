@@ -1,5 +1,6 @@
 package com.kotlin_research.kotlinresearch.di
 
+import com.kotlin_research.kotlinresearch.data.paging.NotePositionalDataSource
 import com.kotlin_research.kotlinresearch.di.module.RoomModule
 import com.kotlin_research.kotlinresearch.di.module.SharedPreferencesModule
 import com.kotlin_research.kotlinresearch.presentation.settings.NotesController
@@ -30,4 +31,5 @@ interface AppComponent {
     fun inject(resultNotePresenter: ResultNotePresenter)
     fun inject(notesAdapter: NotesAdapter)
     fun inject(notePagingAdapter: NotePagingAdapter)
+    fun inject(notePositionalDataSource: NotePositionalDataSource)
 }
