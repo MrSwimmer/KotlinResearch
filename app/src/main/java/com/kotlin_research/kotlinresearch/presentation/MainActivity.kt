@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         if (!router.hasRootController())
             router.setRoot(RouterTransaction.with(NotesController()))
 
-        var bottomNavigationView: BottomNavigationView = findViewById(R.id.main_bottom_navigation)
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.main_bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 

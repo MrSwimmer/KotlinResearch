@@ -8,12 +8,10 @@ import com.kotlin_research.kotlinresearch.data.room.Note
 
 interface NotesContract {
     interface View : MvpView {
-        fun initAdapter(notes: List<Note>)
         fun setAdapter(pagedList: PagedList<Note>)
     }
 
     interface Presenter : MvpPresenter<View> {
-        fun setRecyclerData()
         fun setPagingRecyclerData()
     }
 }

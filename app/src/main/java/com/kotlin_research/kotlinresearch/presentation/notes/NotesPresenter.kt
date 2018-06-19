@@ -28,19 +28,6 @@ class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Pre
         App.getComponent().inject(this)
     }
 
-    @SuppressLint("CheckResult")
-    override fun setRecyclerData() {
-        db.getAll()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { notes ->
-                    run {
-                        Log.i("code", "accept " + notes.size)
-                        if (view != null)
-                            view.initAdapter(notes)
-                    }
-                }
-    }
-
     override fun setPagingRecyclerData() {
         val config = PagedList.Config.Builder()
                 .setEnablePlaceholders(false)

@@ -10,7 +10,6 @@ import com.kotlin_research.kotlinresearch.presentation.settings.SettingsPresente
 import com.kotlin_research.kotlinresearch.presentation.add_note.AddNoteController
 import com.kotlin_research.kotlinresearch.presentation.add_note.AddNotePresenter
 import com.kotlin_research.kotlinresearch.presentation.notes.recycler.NotePagingAdapter
-import com.kotlin_research.kotlinresearch.presentation.notes.recycler.NotesAdapter
 import com.kotlin_research.kotlinresearch.presentation.result_note.ResultNotePresenter
 import com.kotlin_research.kotlinresearch.presentation.statistic.StatisticController
 import com.kotlin_research.kotlinresearch.presentation.statistic.StatisticPresenter
@@ -29,7 +28,6 @@ interface AppComponent {
     fun inject(addNoteController: AddNoteController)
     fun inject(addNotePresenter: AddNotePresenter)
     fun inject(resultNotePresenter: ResultNotePresenter)
-    fun inject(notesAdapter: NotesAdapter)
     fun inject(notePagingAdapter: NotePagingAdapter)
     fun inject(notePositionalDataSource: NotePositionalDataSource)
 }

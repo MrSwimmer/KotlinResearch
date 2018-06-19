@@ -68,4 +68,6 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:1.1.0"
     implementation "android.arch.persistence.room:rxjava2:1.1.0"
     implementation "android.arch.paging:runtime:1.0.0"
+    compile 'com.github.blackfizz:eazegraph:1.2.2@aar'
+    compile 'com.nineoldandroids:library:2.4.0'
 }

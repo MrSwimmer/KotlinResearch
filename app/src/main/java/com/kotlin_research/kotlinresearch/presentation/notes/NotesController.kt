@@ -19,7 +19,6 @@ import com.kotlin_research.kotlinresearch.data.paging.NoteDiffUtilCallback
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.presentation.add_note.AddNoteController
 import com.kotlin_research.kotlinresearch.presentation.notes.recycler.NotePagingAdapter
-import com.kotlin_research.kotlinresearch.presentation.notes.recycler.NotesAdapter
 
 class NotesController : MvpController<NotesContract.View, NotesContract.Presenter>(), NotesContract.View {
 
@@ -43,17 +42,12 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
     override fun onAttach(view: View) {
         super.onAttach(view)
         Log.i("code", "attach")
-        //presenter.setRecyclerData()
         presenter.setPagingRecyclerData()
     }
 
     @OnClick(R.id.notes_fab)
     fun onFABClick() {
         router.pushController(RouterTransaction.with(AddNoteController()))
-    }
-
-    override fun initAdapter(notes: List<Note>) {
-        recyclerView.adapter = NotesAdapter(notes)
     }
 
     override fun setAdapter(pagedList: PagedList<Note>) {
