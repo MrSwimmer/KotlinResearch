@@ -10,7 +10,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import rx.Subscriber
 import javax.inject.Inject
 
 class NotePositionalDataSource : PositionalDataSource<Note>() {
@@ -26,14 +25,10 @@ class NotePositionalDataSource : PositionalDataSource<Note>() {
         db.getPage(params.startPosition, params.loadSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<List<Note>> {
+                .subscribe(object : DisposableSingleObserver<List<Note>>() {
                     override fun onSuccess(t: List<Note>) {
                         Log.i("code", "load range ${t.size}")
                         callback.onResult(t)
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-                        Log.i("code", "subscribe")
                     }
 
                     override fun onError(e: Throwable) {
@@ -46,14 +41,10 @@ class NotePositionalDataSource : PositionalDataSource<Note>() {
         db.getFirstPage(params.pageSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<List<Note>> {
+                .subscribe(object : DisposableSingleObserver<List<Note>>() {
                     override fun onSuccess(t: List<Note>) {
                         Log.i("code", "first load range ${t.size}")
                         callback.onResult(t, 0)
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-                        Log.i("code", "first subscribe")
                     }
 
                     override fun onError(e: Throwable) {

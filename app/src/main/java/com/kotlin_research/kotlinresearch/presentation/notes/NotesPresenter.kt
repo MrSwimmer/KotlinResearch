@@ -10,14 +10,13 @@ import javax.inject.Inject
 import android.arch.paging.PagedList
 import android.os.Handler
 import android.os.Looper
+import com.kotlin_research.kotlinresearch.data.paging.NoteDiffUtilCallback
 import com.kotlin_research.kotlinresearch.data.paging.NotePositionalDataSource
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.di.DaggerAppComponent
 import com.kotlin_research.kotlinresearch.presentation.notes.recycler.NotePagingAdapter
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
-import com.kotlin_research.kotlinresearch.presentation.settings.NotesPresenter.MainThreadExecutor
-import com.kotlin_research.kotlinresearch.presentation.settings.NotesPresenter.MainThreadExecutor
 
 
 class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Presenter {
@@ -45,18 +44,17 @@ class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Pre
     override fun setPagingRecyclerData() {
         val config = PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
-                .setPageSize(10)
+                .setPageSize(2)
                 .build()
-
-
         val pagedList = PagedList.Builder(NotePositionalDataSource(), config)
-                .setNotifyExecutor(Executors.newSingleThreadExecutor())
-                .setFetchExecutor(MainThreadExecutor())
+                .setNotifyExecutor(MainThreadExecutor())
+                .setFetchExecutor(Executors.newSingleThreadExecutor())
                 /*.setBackgroundThreadExecutor(Executors.newSingleThreadExecutor())
                 .setMainThreadExecutor(MainThreadExecutor())*/
                 .build()
 
-        var adapter = NotePagingAdapter(diffCallback = )
+        view.setAdapter(pagedList)
+        //var adapter = NotePagingAdapter(NoteDiffUtilCallback())
     }
 
     class MainThreadExecutor : Executor {

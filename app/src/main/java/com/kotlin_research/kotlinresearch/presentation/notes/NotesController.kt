@@ -1,5 +1,6 @@
 package com.kotlin_research.kotlinresearch.presentation.settings
 
+import android.arch.paging.PagedList
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -14,8 +15,10 @@ import com.bluelinelabs.conductor.RouterTransaction
 import com.hannesdorfmann.mosby3.mvp.conductor.MvpController
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
+import com.kotlin_research.kotlinresearch.data.paging.NoteDiffUtilCallback
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.presentation.add_note.AddNoteController
+import com.kotlin_research.kotlinresearch.presentation.notes.recycler.NotePagingAdapter
 import com.kotlin_research.kotlinresearch.presentation.notes.recycler.NotesAdapter
 
 class NotesController : MvpController<NotesContract.View, NotesContract.Presenter>(), NotesContract.View {
@@ -40,7 +43,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
     override fun onAttach(view: View) {
         super.onAttach(view)
         Log.i("code", "attach")
-        presenter.setRecyclerData()
+        //presenter.setRecyclerData()
         presenter.setPagingRecyclerData()
     }
 
@@ -51,5 +54,11 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
 
     override fun initAdapter(notes: List<Note>) {
         recyclerView.adapter = NotesAdapter(notes)
+    }
+
+    override fun setAdapter(pagedList: PagedList<Note>) {
+        val adapter = NotePagingAdapter(NoteDiffUtilCallback())
+        adapter.submitList(pagedList)
+        recyclerView.adapter = adapter
     }
 }
