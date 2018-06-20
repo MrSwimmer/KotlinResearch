@@ -1,6 +1,5 @@
 package com.kotlin_research.kotlinresearch.domain
 
-import android.util.Log
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.data.room.NoteDao
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -8,22 +7,24 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
 class RoomService(var db: NoteDao) {
-    fun getWeek(today: Long, callback: StatCallback) {
-        db.getWeek(today-604800000)
+
+    fun getInterval(today: Long, interval: Long, callback: StatCallback) {
+        db.getInterval(today-interval)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                    override fun onSuccess(t: List<Note>) {
-                        callback.onSuccess(t)
+                    override fun onSuccess(notes: List<Note>) {
+                        callback.onSuccess(notes)
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.i("code", "error ${e.message}")
+                        callback.onError(e)
                     }
                 })
     }
 
     interface StatCallback {
         fun onSuccess(notes: List<Note>)
+        fun onError(e: Throwable)
     }
 }

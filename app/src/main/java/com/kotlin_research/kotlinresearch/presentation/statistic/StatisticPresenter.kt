@@ -1,6 +1,7 @@
 package com.kotlin_research.kotlinresearch.presentation.statistic
 
 import android.graphics.Color
+import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
@@ -12,6 +13,9 @@ import java.util.*
 import javax.inject.Inject
 
 class StatisticPresenter : MvpBasePresenter<StatisticContract.View>(), StatisticContract.Presenter {
+    val INTERVAL_YEAR = 1
+    val INTERVAL_MONTH = 1
+    private val INTERVAL_WEEK: Long = 604800000
 
     @Inject
     lateinit var roomService: RoomService
@@ -21,27 +25,23 @@ class StatisticPresenter : MvpBasePresenter<StatisticContract.View>(), Statistic
     }
 
     override fun getDataForLineChart() {
-        var series = ValueLineSeries()
-        series.color = R.color.main_red
-        series.addPoint(ValueLinePoint("1", 2.4f))
-        series.addPoint(ValueLinePoint("2", 1.4f))
-        series.addPoint(ValueLinePoint("3", 3f))
-        series.addPoint(ValueLinePoint("4", 6f))
-        series.addPoint(ValueLinePoint("5", 8f))
-        series.addPoint(ValueLinePoint("6", 4f))
-        series.addPoint(ValueLinePoint("7", 6f))
-        series.addPoint(ValueLinePoint("8", 2f))
-        series.addPoint(ValueLinePoint("9", 1f))
-        view.setLineChartData(series)
 
-        val statin = object : RoomService.StatCallback {
+        roomService.getInterval(Date().time, INTERVAL_WEEK, object : RoomService.StatCallback {
             override fun onSuccess(notes: List<Note>) {
-
+                val series = ValueLineSeries()
+                series.color = R.color.main_red
+                notes.forEach{
+                    val date = Date(it.date)
+                    val day = date.day
+                    val month = date.month
+                    series.addPoint(ValueLinePoint("$day.$month", it.points.toFloat()))
+                }
+                view.setLineChartData(series)
             }
-        }
 
-        roomService.getWeek(Date().time, RoomService.StatCallback {
-
+            override fun onError(e: Throwable) {
+                Log.i("code", "error get Week " + e.message)
+            }
         })
     }
 }

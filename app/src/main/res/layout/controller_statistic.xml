@@ -32,6 +32,15 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
             <TextView
+                android:id="@+id/textView31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Все"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <TextView
                 android:id="@+id/textView23"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,8 +87,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             app:egCurveSmoothness="0.4"
-            app:egIndicatorLineColor="@color/blue"
-            app:egIndicatorTextColor="@color/blue"
+            app:egIndicatorLineColor="@color/main_red"
+            app:egIndicatorTextColor="@color/main_red"
             app:egLegendHeight="40dp"
             app:egShowStandardValue="true"
             app:egUseCubic="true"
