@@ -1,6 +1,5 @@
 package com.kotlin_research.kotlinresearch.presentation.statistic
 
-import android.graphics.Color
 import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.kotlin_research.kotlinresearch.App
@@ -26,7 +25,7 @@ class StatisticPresenter : MvpBasePresenter<StatisticContract.View>(), Statistic
 
     override fun getDataForLineChart() {
 
-        roomService.getInterval(Date().time, INTERVAL_WEEK, object : RoomService.StatCallback {
+        roomService.getInterval(Date().time, INTERVAL_WEEK, object : RoomService.NotesCallback {
             override fun onSuccess(notes: List<Note>) {
                 val series = ValueLineSeries()
                 series.color = R.color.main_red

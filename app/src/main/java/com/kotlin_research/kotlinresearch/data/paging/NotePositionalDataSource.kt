@@ -1,15 +1,9 @@
 package com.kotlin_research.kotlinresearch.data.paging
 
 import android.arch.paging.PositionalDataSource
-import android.util.Log
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.data.room.Note
-import com.kotlin_research.kotlinresearch.data.room.NoteDao
-import io.reactivex.SingleObserver
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
+import com.kotlin_research.kotlinresearch.domain.RoomService
 import javax.inject.Inject
 
 class NotePositionalDataSource : PositionalDataSource<Note>() {
@@ -19,37 +13,13 @@ class NotePositionalDataSource : PositionalDataSource<Note>() {
     }
 
     @Inject
-    lateinit var db: NoteDao
+    lateinit var db: RoomService
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Note>) {
-        db.getPage(params.startPosition, params.loadSize)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                    override fun onSuccess(t: List<Note>) {
-                        Log.i("code", "load range ${t.size}")
-                        callback.onResult(t)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.i("code", "error ${e.message}")
-                    }
-                })
+        db.getRange(params, callback)
     }
 
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Note>) {
-        db.getFirstPage(params.pageSize)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                    override fun onSuccess(t: List<Note>) {
-                        Log.i("code", "first load range ${t.size}")
-                        callback.onResult(t, 0)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.i("code", "first error ${e.message}")
-                    }
-                })
+        db.getFirstPage(params, callback)
     }
 }

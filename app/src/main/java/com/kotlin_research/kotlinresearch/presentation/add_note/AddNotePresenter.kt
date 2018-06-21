@@ -1,9 +1,11 @@
 package com.kotlin_research.kotlinresearch.presentation.add_note
 
+import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.data.room.NoteDao
+import com.kotlin_research.kotlinresearch.domain.RoomService
 import rx.Observable
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
@@ -12,7 +14,7 @@ import javax.inject.Inject
 
 class AddNotePresenter : MvpBasePresenter<AddNoteContract.View>(), AddNoteContract.Presenter {
     @Inject
-    lateinit var db: NoteDao
+    lateinit var db: RoomService
 
     init {
         App.getComponent().inject(this)
@@ -40,23 +42,15 @@ class AddNotePresenter : MvpBasePresenter<AddNoteContract.View>(), AddNoteContra
     }
 
     override fun addNote(note: Note) {
-        Observable.create(Observable.OnSubscribe<String> { subscriber ->
-            db.insert(note)
-            subscriber.onCompleted()
+        db.addNote(note, object : RoomService.AddNoteCallback {
+            override fun onSuccess() {
+                view.gotoResult(note)
+            }
+
+            override fun onError(e: Throwable) {
+                Log.i("code", e.message)
+            }
+
         })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Subscriber<String>() {
-                    override fun onNext(t: String?) {
-                    }
-
-                    override fun onCompleted() {
-                        view.gotoResult(note)
-                    }
-
-                    override fun onError(e: Throwable) {
-                    }
-
-                })
     }
 }
