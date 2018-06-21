@@ -9,6 +9,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/linearLayout7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+            <ImageView
+                android:id="@+id/add_note_moment_sleep2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_alarm" />
+
+            <ImageView
+                android:id="@+id/add_note_moment_training2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_training" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
@@ -32,7 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
             <TextView
-                android:id="@+id/textView31"
+                android:id="@+id/statistic_period_all"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -41,7 +73,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/statistic_period_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -50,7 +82,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/statistic_period_month"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -60,7 +92,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/statistic_period_week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -77,7 +109,7 @@
             android:text="Балл"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
         <org.eazegraph.lib.charts.ValueLineChart xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/statistic_line_chart"
@@ -86,9 +118,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:egCurveSmoothness="0.4"
-            app:egIndicatorLineColor="@color/main_red"
-            app:egIndicatorTextColor="@color/main_red"
+            app:egCurveSmoothness="0.01"
+            app:egIndicatorLineColor="@color/grey_text"
+            app:egIndicatorTextColor="@color/grey_text"
             app:egLegendHeight="40dp"
             app:egShowStandardValue="true"
             app:egUseCubic="true"
@@ -108,18 +140,39 @@
             app:layout_constraintTop_toBottomOf="@+id/statistic_line_chart" />
 
         <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/piechart"
+            android:id="@+id/statistic_pie_chart"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:padding="8dp"
             app:egLegendTextSize="18sp"
             app:egUsePieRotation="true"
-            app:egValueTextSize="36sp"
+            app:egValueTextColor="@color/main_red"
+            app:egValueTextSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Момент"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Анализ"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statistic_pie_chart" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

@@ -1,16 +1,17 @@
 package com.kotlin_research.kotlinresearch.presentation.statistic
 
-import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter
 import com.hannesdorfmann.mosby3.mvp.MvpView
+import org.eazegraph.lib.models.PieModel
 import org.eazegraph.lib.models.ValueLineSeries
 
 interface StatisticContract {
     interface View : MvpView {
         fun setLineChartData(series: ValueLineSeries)
+        fun setPieChart(pieSeries: ArrayList<PieModel>)
     }
 
     interface Presenter : MvpPresenter<View> {
-        fun getDataForLineChart()
+        fun getDataForChart(period: Int)
     }
 }
