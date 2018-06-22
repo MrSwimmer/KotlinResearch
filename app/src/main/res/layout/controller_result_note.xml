@@ -43,7 +43,7 @@
                     app:srcCompat="@drawable/ic_sitting" />
 
                 <TextView
-                    android:id="@+id/textView20"
+                    android:id="@+id/result_pulse_sitting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -71,7 +71,7 @@
                     app:srcCompat="@drawable/ic_stand" />
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/result_pulse_standing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -116,7 +116,7 @@
                     android:text="Зона" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/result_zone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -140,7 +140,7 @@
                     android:text="Балл" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/result_points"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -174,6 +174,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView16">
 
             <LinearLayout
+                android:id="@+id/result_zone_first"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -201,10 +202,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/result_zone_second"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/grey_back"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -230,6 +231,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/result_zone_third"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -257,6 +259,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/result_zone_fourth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -285,7 +288,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/result_zone_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -294,12 +297,12 @@
             android:text="@string/zone_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toBottomOf="@+id/result_zone_title" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/result_zone_title"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="15dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
@@ -316,7 +319,7 @@
             android:text="Показатели"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintTop_toBottomOf="@+id/result_zone_text" />
 
         <LinearLayout
             android:id="@+id/linearLayout3"
@@ -327,31 +330,31 @@
             android:paddingBottom="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7">
+            app:layout_constraintTop_toBottomOf="@+id/result_moment">
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/result_delete"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_delete" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/result_edit"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_edit" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/result_share"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_share" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/result_back"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
@@ -359,13 +362,13 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/result_moment"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView22"
-            app:srcCompat="@drawable/ic_alarm" />
+            app:srcCompat="@drawable/ic_alarm_grey" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

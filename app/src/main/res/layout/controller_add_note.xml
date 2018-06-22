@@ -91,7 +91,7 @@
                 app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_alarm" />
+                app:srcCompat="@drawable/ic_alarm_grey" />
 
             <ImageView
                 android:id="@+id/add_note_moment_training"
@@ -101,7 +101,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_training" />
+                app:srcCompat="@drawable/ic_training_red" />
         </LinearLayout>
 
         <TextView

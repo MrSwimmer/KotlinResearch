@@ -20,6 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     @BindView(R.id.main_container)
     lateinit var mainFrameLayout: FrameLayout
+    @BindView(R.id.main_bottom_navigation)
+    lateinit var bottomNavigationView: BottomNavigationView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,21 +31,21 @@ class MainActivity : AppCompatActivity() {
         router = Conductor.attachRouter(this, mainFrameLayout, savedInstanceState)
         if (!router.hasRootController())
             router.setRoot(RouterTransaction.with(NotesController()))
-
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.main_bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_action_notes -> {
-                router.replaceTopController(RouterTransaction.with(NotesController()))
-            }
-            R.id.navigation_action_statistic -> {
-                router.replaceTopController(RouterTransaction.with(StatisticController()))
-            }
-            R.id.navigation_action_settings -> {
-                router.replaceTopController(RouterTransaction.with(SettingsController()))
+        if (item.itemId != bottomNavigationView.selectedItemId) {
+            when (item.itemId) {
+                R.id.navigation_action_notes -> {
+                    router.replaceTopController(RouterTransaction.with(NotesController()))
+                }
+                R.id.navigation_action_statistic -> {
+                    router.replaceTopController(RouterTransaction.with(StatisticController()))
+                }
+                R.id.navigation_action_settings -> {
+                    router.replaceTopController(RouterTransaction.with(SettingsController()))
+                }
             }
         }
         true

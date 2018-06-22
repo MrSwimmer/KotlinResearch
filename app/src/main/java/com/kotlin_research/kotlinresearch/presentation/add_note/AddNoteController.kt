@@ -24,6 +24,10 @@ class AddNoteController : MvpController<AddNoteContract.View, AddNoteContract.Pr
     lateinit var pulseStandingField: EditText
     @BindView(R.id.add_note_get_result)
     lateinit var getResultButton: ImageView
+    @BindView(R.id.add_note_moment_sleep)
+    lateinit var sleepImage: ImageView
+    @BindView(R.id.add_note_moment_training)
+    lateinit var trainImage: ImageView
 
     var afterSleep = false
     lateinit var pulseSitting: String
@@ -40,6 +44,17 @@ class AddNoteController : MvpController<AddNoteContract.View, AddNoteContract.Pr
         return view
     }
 
+    override fun onAttach(view: View) {
+        super.onAttach(view)
+        if (afterSleep) {
+            sleepImage.setImageResource(R.drawable.ic_alarm_red)
+            trainImage.setImageResource(R.drawable.ic_training_grey)
+        } else {
+            sleepImage.setImageResource(R.drawable.ic_alarm_grey)
+            trainImage.setImageResource(R.drawable.ic_training_red)
+        }
+    }
+
     @OnClick(R.id.add_note_get_result)
     fun onGetResultClick() {
         pulseSitting = pulseSittingField.text.toString()
@@ -49,11 +64,26 @@ class AddNoteController : MvpController<AddNoteContract.View, AddNoteContract.Pr
 
     override fun setRes(points: Double, zone: Int) {
         val date = Date()
+
         val note = Note(pulseSitting, pulseStanding, date.time, points, zone, afterSleep)
         presenter.addNote(note)
     }
 
     override fun gotoResult(note: Note) {
         router.replaceTopController(RouterTransaction.with(ResultNoteController(note)))
+    }
+
+    @OnClick(R.id.add_note_moment_sleep)
+    fun onSleepClick() {
+        afterSleep = true
+        sleepImage.setImageResource(R.drawable.ic_alarm_red)
+        trainImage.setImageResource(R.drawable.ic_training_grey)
+    }
+
+    @OnClick(R.id.add_note_moment_training)
+    fun onTrainClick() {
+        afterSleep = false
+        sleepImage.setImageResource(R.drawable.ic_alarm_grey)
+        trainImage.setImageResource(R.drawable.ic_training_red)
     }
 }

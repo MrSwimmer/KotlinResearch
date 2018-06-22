@@ -29,9 +29,9 @@ class FormatNote {
                     colorZone = Color.parseColor("#d7443c")
                 }
             }
-            var moment = R.drawable.ic_training
+            var moment = R.drawable.ic_training_red
             if (note.afterSleep)
-                moment = R.drawable.ic_alarm
+                moment = R.drawable.ic_alarm_red
 
             return FormatedNote(date, zone, moment, colorZone)
         }

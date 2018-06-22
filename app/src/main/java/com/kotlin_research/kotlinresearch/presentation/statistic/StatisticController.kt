@@ -2,6 +2,7 @@ package com.kotlin_research.kotlinresearch.presentation.statistic
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,62 +63,69 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
 
     override fun onAttach(view: View) {
         super.onAttach(view)
-        updatePeriod(3)
+        Log.i("code", "on attach $currentPeriod")
+        updatePeriod(currentPeriod)
     }
 
     @OnClick(R.id.statistic_period_all)
     fun onPeriodAllClick() {
-        updatePeriod(0)
+        Log.i("code", periodAll.textSize.toString())
+        if (periodAll.textSize != 42.0f)
+            updatePeriod(0)
     }
 
     @OnClick(R.id.statistic_period_year)
     fun onPeriodYearClick() {
-        updatePeriod(1)
+        if (periodYear.textSize != 42.0f)
+            updatePeriod(1)
     }
 
     @OnClick(R.id.statistic_period_month)
     fun onPeriodMonthClick() {
-        updatePeriod(2)
+        if (periodMonth.textSize != 42.0f)
+            updatePeriod(2)
     }
 
     @OnClick(R.id.statistic_period_week)
     fun onPeriodWeekClick() {
-        updatePeriod(3)
+        if (periodWeek.textSize != 42.0f)
+            updatePeriod(3)
     }
 
     @SuppressLint("ResourceAsColor")
     private fun updatePeriod(period: Int) {
-        if (currentPeriod != period) {
-            currentPeriod = period
-            val grey = Color.parseColor("#848484")
-            val red = Color.parseColor("#d7443c")
-            periodAll.setTextColor(grey)
-            periodYear.setTextColor(grey)
-            periodMonth.setTextColor(grey)
-            periodWeek.setTextColor(grey)
-            periodAll.textSize = 18f
-            periodYear.textSize = 18f
-            periodMonth.textSize = 18f
-            periodWeek.textSize = 18f
-            when (period) {
-                0 -> {
-                    periodAll.setTextColor(red)
-                    periodAll.textSize = 21f
-                }
-                1 -> {
-                    periodYear.setTextColor(red)
-                    periodYear.textSize = 21f
-                }
-                2 -> {
-                    periodMonth.setTextColor(red)
-                    periodMonth.textSize = 21f
-                }
-                3 -> {
-                    periodWeek.setTextColor(red)
-                    periodWeek.textSize = 21f
-                }
+        currentPeriod = period
+        val grey = Color.parseColor("#848484")
+        val red = Color.parseColor("#d7443c")
+        periodAll.setTextColor(grey)
+        periodYear.setTextColor(grey)
+        periodMonth.setTextColor(grey)
+        periodWeek.setTextColor(grey)
+        periodAll.textSize = 18f
+        periodYear.textSize = 18f
+        periodMonth.textSize = 18f
+        periodWeek.textSize = 18f
+        when (period) {
+            0 -> {
+                periodAll.setTextColor(red)
+                periodAll.textSize = 21f
             }
-            presenter.getDataForChart(period)
+            1 -> {
+                periodYear.setTextColor(red)
+                periodYear.textSize = 21f
+            }
+            2 -> {
+                periodMonth.setTextColor(red)
+                periodMonth.textSize = 21f
+            }
+            3, 4 -> {
+                periodWeek.setTextColor(red)
+                periodWeek.textSize = 21f
+            }
         }
+        if (period == 4)
+            presenter.getDataForChart(period - 1)
+        else
+            presenter.getDataForChart(period)
     }
 }

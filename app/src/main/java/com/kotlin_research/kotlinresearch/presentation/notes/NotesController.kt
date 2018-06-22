@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
+import butterknife.Optional
 import com.bluelinelabs.conductor.RouterTransaction
 import com.hannesdorfmann.mosby3.mvp.conductor.MvpController
 import com.kotlin_research.kotlinresearch.App
@@ -46,6 +47,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
         presenter.setPagingRecyclerData()
     }
 
+    @Optional
     @Nullable
     @OnClick(R.id.notes_fab)
     fun onFABClick() {
