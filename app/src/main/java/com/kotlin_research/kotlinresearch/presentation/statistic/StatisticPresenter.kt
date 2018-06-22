@@ -5,7 +5,7 @@ import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.data.room.Note
-import com.kotlin_research.kotlinresearch.domain.RoomService
+import com.kotlin_research.kotlinresearch.domain.interactor.RoomService
 import org.eazegraph.lib.models.PieModel
 import org.eazegraph.lib.models.ValueLinePoint
 import org.eazegraph.lib.models.ValueLineSeries

@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.domain
+package com.kotlin_research.kotlinresearch.domain.interactor
 
 import android.content.SharedPreferences
 

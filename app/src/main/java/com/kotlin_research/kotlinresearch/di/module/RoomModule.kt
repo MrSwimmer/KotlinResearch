@@ -3,9 +3,8 @@ package com.kotlin_research.kotlinresearch.di.module
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.kotlin_research.kotlinresearch.data.room.AppDatabase
-import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.data.room.NoteDao
-import com.kotlin_research.kotlinresearch.domain.RoomService
+import com.kotlin_research.kotlinresearch.domain.interactor.RoomService
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

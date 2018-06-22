@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kotlin_research.kotlinresearch.R
 import com.kotlin_research.kotlinresearch.data.room.Note
+import com.kotlin_research.kotlinresearch.domain.format.FormatNote
 
 class NotePagingAdapter(diffCallback: DiffUtil.ItemCallback<Note>) : PagedListAdapter<Note, NoteViewHolder>(diffCallback) {
 
@@ -16,6 +17,11 @@ class NotePagingAdapter(diffCallback: DiffUtil.ItemCallback<Note>) : PagedListAd
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note = getItem(position)
+        val formatNote = FormatNote.format(note!!)
         holder.points.text = "${note!!.points}"
+        holder.date.text = formatNote.date
+        holder.zone.text = formatNote.zone
+        holder.zone.setTextColor(formatNote.colorZone)
+        holder.moment.setImageResource(formatNote.moment)
     }
 }

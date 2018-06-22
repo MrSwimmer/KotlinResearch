@@ -3,7 +3,7 @@ package com.kotlin_research.kotlinresearch.data.paging
 import android.arch.paging.PositionalDataSource
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.data.room.Note
-import com.kotlin_research.kotlinresearch.domain.RoomService
+import com.kotlin_research.kotlinresearch.domain.interactor.RoomService
 import javax.inject.Inject
 
 class NotePositionalDataSource : PositionalDataSource<Note>() {

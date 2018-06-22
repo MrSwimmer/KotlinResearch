@@ -19,6 +19,7 @@ import com.kotlin_research.kotlinresearch.data.paging.NoteDiffUtilCallback
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.presentation.add_note.AddNoteController
 import com.kotlin_research.kotlinresearch.presentation.notes.recycler.NotePagingAdapter
+import javax.annotation.Nullable
 
 class NotesController : MvpController<NotesContract.View, NotesContract.Presenter>(), NotesContract.View {
 
@@ -45,6 +46,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
         presenter.setPagingRecyclerData()
     }
 
+    @Nullable
     @OnClick(R.id.notes_fab)
     fun onFABClick() {
         router.pushController(RouterTransaction.with(AddNoteController()))
