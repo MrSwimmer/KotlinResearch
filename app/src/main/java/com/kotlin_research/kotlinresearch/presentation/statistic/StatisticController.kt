@@ -84,7 +84,7 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
         when (moment) {
             0 -> sleepImage.setImageResource(R.drawable.ic_alarm_red)
             1 -> trainImage.setImageResource(R.drawable.ic_training_red)
-            2-> allImage.setImageResource(R.drawable.ic_moment_all_red)
+            2 -> allImage.setImageResource(R.drawable.ic_moment_all_red)
         }
     }
 

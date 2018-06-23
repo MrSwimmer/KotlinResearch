@@ -1,25 +1,18 @@
 package com.kotlin_research.kotlinresearch.presentation.settings
 
-import android.annotation.SuppressLint
-import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.kotlin_research.kotlinresearch.App
-import com.kotlin_research.kotlinresearch.data.room.NoteDao
-import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 import android.arch.paging.PagedList
 import android.os.Handler
 import android.os.Looper
-import com.kotlin_research.kotlinresearch.data.paging.NoteDiffUtilCallback
 import com.kotlin_research.kotlinresearch.data.paging.NotePositionalDataSource
-import com.kotlin_research.kotlinresearch.data.room.Note
-import com.kotlin_research.kotlinresearch.di.DaggerAppComponent
-import com.kotlin_research.kotlinresearch.presentation.notes.recycler.NotePagingAdapter
+import java.util.*
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 
 class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Presenter {
+
 
     init {
         App.getComponent().inject(this)
@@ -34,7 +27,18 @@ class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Pre
                 .setNotifyExecutor(MainThreadExecutor())
                 .setFetchExecutor(Executors.newSingleThreadExecutor())
                 .build()
+        view.setAdapter(pagedList)
+    }
 
+    override fun setFilterPagingRecyclerData(currentPeriod: Int, moment: Int) {
+        val config = PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPageSize(8)
+                .build()
+        val pagedList = PagedList.Builder(NotePositionalDataSource(Date().time, getLongInterval(currentPeriod), moment), config)
+                .setNotifyExecutor(MainThreadExecutor())
+                .setFetchExecutor(Executors.newSingleThreadExecutor())
+                .build()
         view.setAdapter(pagedList)
     }
 
@@ -43,6 +47,16 @@ class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Pre
         override fun execute(command: Runnable?) {
             Handler(Looper.getMainLooper()).post(command)
         }
+    }
+
+    private fun getLongInterval(period: Int): Long {
+        when (period) {
+            0 -> return -1
+            1 -> return 31536000000
+            2 -> return 2592000000
+            3 -> return 604800000
+        }
+        return 604800000
     }
 }
 

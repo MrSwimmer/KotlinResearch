@@ -19,12 +19,12 @@
         app:srcCompat="@drawable/ic_add" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/notes_filter_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey_filter_back"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/notes_show_hide_filter">
 
         <LinearLayout
             android:id="@+id/linearLayout7"
@@ -38,7 +38,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView17">
 
             <ImageView
-                android:id="@+id/statistic_sleep_image"
+                android:id="@+id/notes_sleep_image"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
@@ -49,7 +49,7 @@
                 app:srcCompat="@drawable/ic_alarm_grey" />
 
             <ImageView
-                android:id="@+id/statistic_train_image"
+                android:id="@+id/notes_train_image"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
@@ -92,7 +92,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView10">
 
             <TextView
-                android:id="@+id/statistic_period_all"
+                android:id="@+id/notes_period_all"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -101,7 +101,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/statistic_period_year"
+                android:id="@+id/notes_period_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -110,7 +110,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/statistic_period_month"
+                android:id="@+id/notes_period_month"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,7 +120,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/statistic_period_week"
+                android:id="@+id/notes_period_week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -141,7 +141,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/linearLayout9"
+        android:id="@+id/notes_show_hide_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey_back"
@@ -152,7 +152,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/notes_show_hide_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -183,5 +183,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/notes_filter_layout" />
 </android.support.constraint.ConstraintLayout>
