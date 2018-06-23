@@ -20,9 +20,9 @@
             app:layout_constraintTop_toBottomOf="@+id/textView11">
 
             <ImageView
-                android:id="@+id/add_note_moment_sleep2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/statistic_sleep_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_weight="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.503"
@@ -31,14 +31,24 @@
                 app:srcCompat="@drawable/ic_alarm_grey" />
 
             <ImageView
-                android:id="@+id/add_note_moment_training2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/statistic_train_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_weight="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_training_red" />
+                app:srcCompat="@drawable/ic_training_grey" />
+
+            <ImageView
+                android:id="@+id/statistic_all_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_moment_all_red" />
         </LinearLayout>
 
         <TextView

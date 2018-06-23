@@ -32,6 +32,6 @@ interface NoteDao {
     @Query("SELECT * FROM notes LIMIT :count")
     fun getFirstPage(count: Int): Single<List<Note>>
 
-    @Query("SELECT * FROM notes WHERE date >= :begin")
-    fun getInterval(begin: Long): Single<List<Note>>
+    @Query("SELECT * FROM notes WHERE date >= :begin AND afterSleep = :afterSleep")
+    fun getInterval(begin: Long, afterSleep: Boolean): Single<List<Note>>
 }

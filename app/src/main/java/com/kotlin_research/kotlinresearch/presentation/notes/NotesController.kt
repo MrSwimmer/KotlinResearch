@@ -47,8 +47,6 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
         presenter.setPagingRecyclerData()
     }
 
-    @Optional
-    @Nullable
     @OnClick(R.id.notes_fab)
     fun onFABClick() {
         router.pushController(RouterTransaction.with(AddNoteController()))

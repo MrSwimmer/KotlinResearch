@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -22,6 +23,7 @@ import kotlin.collections.ArrayList
 class StatisticController : MvpController<StatisticContract.View, StatisticContract.Presenter>(), StatisticContract.View {
 
     private var currentPeriod = 4
+    private var moment = 2
 
     @BindView(R.id.statistic_line_chart)
     lateinit var lineChart: ValueLineChart
@@ -36,7 +38,12 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
     lateinit var periodMonth: TextView
     @BindView(R.id.statistic_period_week)
     lateinit var periodWeek: TextView
-
+    @BindView(R.id.statistic_sleep_image)
+    lateinit var sleepImage: ImageView
+    @BindView(R.id.statistic_train_image)
+    lateinit var trainImage: ImageView
+    @BindView(R.id.statistic_all_image)
+    lateinit var allImage: ImageView
 
     override fun createPresenter(): StatisticContract.Presenter {
         return StatisticPresenter()
@@ -50,11 +57,13 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
     }
 
     override fun setLineChartData(series: ValueLineSeries) {
+        lineChart.clearChart()
         lineChart.addSeries(series)
         lineChart.startAnimation()
     }
 
     override fun setPieChart(pieSeries: ArrayList<PieModel>) {
+        pieChart.clearChart()
         pieSeries.forEach {
             pieChart.addPieSlice(it)
         }
@@ -65,6 +74,18 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
         super.onAttach(view)
         Log.i("code", "on attach $currentPeriod")
         updatePeriod(currentPeriod)
+        updateMoment(moment)
+    }
+
+    private fun updateMoment(moment: Int) {
+        sleepImage.setImageResource(R.drawable.ic_alarm_grey)
+        trainImage.setImageResource(R.drawable.ic_training_grey)
+        allImage.setImageResource(R.drawable.ic_moment_all_grey)
+        when (moment) {
+            0 -> sleepImage.setImageResource(R.drawable.ic_alarm_red)
+            1 -> trainImage.setImageResource(R.drawable.ic_training_red)
+            2-> allImage.setImageResource(R.drawable.ic_moment_all_red)
+        }
     }
 
     @OnClick(R.id.statistic_period_all)
@@ -90,6 +111,27 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
     fun onPeriodWeekClick() {
         if (periodWeek.textSize != 42.0f)
             updatePeriod(3)
+    }
+
+    @OnClick(R.id.statistic_train_image)
+    fun onTrainClick() {
+        moment = 1
+        updateMoment(moment)
+        presenter.getDataForChart(currentPeriod, moment)
+    }
+
+    @OnClick(R.id.statistic_sleep_image)
+    fun onSleepClick() {
+        moment = 0
+        updateMoment(moment)
+        presenter.getDataForChart(currentPeriod, moment)
+    }
+
+    @OnClick(R.id.statistic_all_image)
+    fun onAllClick() {
+        moment = 2
+        updateMoment(moment)
+        presenter.getDataForChart(currentPeriod, moment)
     }
 
     @SuppressLint("ResourceAsColor")
@@ -124,8 +166,8 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
             }
         }
         if (period == 4)
-            presenter.getDataForChart(period - 1)
+            presenter.getDataForChart(period - 1, moment)
         else
-            presenter.getDataForChart(period)
+            presenter.getDataForChart(period, moment)
     }
 }

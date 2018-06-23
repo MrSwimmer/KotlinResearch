@@ -12,8 +12,8 @@ import rx.Subscriber
 
 class RoomService(var db: NoteDao) {
 
-    fun getInterval(today: Long, interval: Long, callback: NotesCallback) {
-        db.getInterval(today-interval)
+    fun getInterval(today: Long, interval: Long, afterSleep: Boolean, callback: NotesCallback) {
+        db.getInterval(today-interval, afterSleep)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : DisposableSingleObserver<List<Note>>() {

@@ -12,6 +12,6 @@ interface StatisticContract {
     }
 
     interface Presenter : MvpPresenter<View> {
-        fun getDataForChart(period: Int)
+        fun getDataForChart(period: Int, afterSleep: Int)
     }
 }

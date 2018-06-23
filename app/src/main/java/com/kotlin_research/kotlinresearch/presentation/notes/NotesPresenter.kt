@@ -28,7 +28,7 @@ class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Pre
     override fun setPagingRecyclerData() {
         val config = PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
-                .setPageSize(2)
+                .setPageSize(8)
                 .build()
         val pagedList = PagedList.Builder(NotePositionalDataSource(), config)
                 .setNotifyExecutor(MainThreadExecutor())

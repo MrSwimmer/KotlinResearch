@@ -11,5 +11,6 @@
     <color name="green">#c0e637</color>
     <color name="blue">#55bbeb</color>
     <color name="green_trans">#aac0e637</color>
+    <color name="grey_filter_back">#dcdcdc</color>
 
 </resources>

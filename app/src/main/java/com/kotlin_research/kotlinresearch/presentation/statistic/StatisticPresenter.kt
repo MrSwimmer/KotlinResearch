@@ -22,8 +22,8 @@ class StatisticPresenter : MvpBasePresenter<StatisticContract.View>(), Statistic
         App.getComponent().inject(this)
     }
 
-    override fun getDataForChart(period: Int) {
-        roomService.getInterval(Date().time, getLongInterval(period), object : RoomService.NotesCallback {
+    override fun getDataForChart(period: Int, afterSleep: Int) {
+        roomService.getInterval(Date().time, getLongInterval(period), afterSleep, object : RoomService.NotesCallback {
             override fun onSuccess(notes: List<Note>) {
                 val lineSeries = ValueLineSeries()
                 val zones = Array(4, { 0 })
