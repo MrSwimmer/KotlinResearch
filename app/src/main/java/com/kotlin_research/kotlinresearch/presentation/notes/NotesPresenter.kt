@@ -18,24 +18,34 @@ class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Pre
         App.getComponent().inject(this)
     }
 
-    override fun setPagingRecyclerData() {
-        val config = PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setPageSize(8)
-                .build()
-        val pagedList = PagedList.Builder(NotePositionalDataSource(), config)
-                .setNotifyExecutor(MainThreadExecutor())
-                .setFetchExecutor(Executors.newSingleThreadExecutor())
-                .build()
-        view.setAdapter(pagedList)
-    }
+    override fun setRecyclerData(currentPeriod: Int, moment: Int) {
+        val today = Date().time
+        val beginPeriod = today - getLongInterval(currentPeriod)
+        val withPeriod = currentPeriod != 0
+        val withMoment = moment != 2
+        var afterSleep = true
+        when (moment) {
+            0 -> afterSleep = true
+            1 -> afterSleep = false
+        }
+        lateinit var positionalDataSource: NotePositionalDataSource
+        positionalDataSource = if (withPeriod) {
+            if (withMoment)
+                NotePositionalDataSource(beginPeriod, afterSleep)
+            else
+                NotePositionalDataSource(beginPeriod)
+        } else {
+            if (withMoment)
+                NotePositionalDataSource(afterSleep)
+            else
+                NotePositionalDataSource()
+        }
 
-    override fun setFilterPagingRecyclerData(currentPeriod: Int, moment: Int) {
         val config = PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
                 .setPageSize(8)
                 .build()
-        val pagedList = PagedList.Builder(NotePositionalDataSource(Date().time, getLongInterval(currentPeriod), moment), config)
+        val pagedList = PagedList.Builder(positionalDataSource, config)
                 .setNotifyExecutor(MainThreadExecutor())
                 .setFetchExecutor(Executors.newSingleThreadExecutor())
                 .build()
@@ -43,7 +53,6 @@ class NotesPresenter : MvpBasePresenter<NotesContract.View>(), NotesContract.Pre
     }
 
     class MainThreadExecutor : Executor {
-
         override fun execute(command: Runnable?) {
             Handler(Looper.getMainLooper()).post(command)
         }

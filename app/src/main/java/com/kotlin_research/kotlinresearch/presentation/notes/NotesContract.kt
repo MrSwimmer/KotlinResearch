@@ -11,7 +11,6 @@ interface NotesContract {
     }
 
     interface Presenter : MvpPresenter<View> {
-        fun setPagingRecyclerData()
-        fun setFilterPagingRecyclerData(currentPeriod: Int, moment: Int)
+        fun setRecyclerData(currentPeriod: Int, moment: Int)
     }
 }

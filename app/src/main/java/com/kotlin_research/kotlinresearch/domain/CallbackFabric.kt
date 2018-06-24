@@ -1,5 +1,6 @@
 package com.kotlin_research.kotlinresearch.domain
 
+import android.arch.paging.PositionalDataSource
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.domain.interactor.RoomService
 import io.reactivex.observers.DisposableSingleObserver
@@ -14,6 +15,18 @@ class CallBackFabric {
 
                 override fun onError(e: Throwable) {
                     callback.onError(e)
+                }
+            }
+        }
+
+        fun getNotePageCallback(callback: PositionalDataSource.LoadRangeCallback<Note>): DisposableSingleObserver<List<Note>> {
+            return object : DisposableSingleObserver<List<Note>>() {
+                override fun onSuccess(notes: List<Note>) {
+                    callback.onResult(notes)
+                }
+
+                override fun onError(e: Throwable) {
+
                 }
             }
         }

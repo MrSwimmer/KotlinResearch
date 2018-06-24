@@ -1,24 +1,30 @@
 package com.kotlin_research.kotlinresearch.data.paging
 
 import android.arch.paging.PositionalDataSource
-import android.util.Log
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.domain.interactor.RoomService
 import javax.inject.Inject
 
 class NotePositionalDataSource() : PositionalDataSource<Note>() {
+    var type = 0
+    var afterSleep = false
+    var beginPeriod: Long = 0
 
-    var filter = false
-    var longInterval: Long = 0
-    var moment: Int = 0
-    var time: Long = 0
+    constructor(afterSleep: Boolean) : this() {
+        type = 1
+        this.afterSleep = afterSleep
+    }
 
-    constructor(time: Long, longInterval: Long, moment: Int) : this() {
-        filter = true
-        this.time = time
-        this.longInterval = longInterval
-        this.moment = moment
+    constructor(beginPeriod: Long) : this() {
+        type = 2
+        this.beginPeriod = beginPeriod
+    }
+
+    constructor(beginPeriod: Long, afterSleep: Boolean) : this() {
+        type = 3
+        this.afterSleep = afterSleep
+        this.beginPeriod = beginPeriod
     }
 
     init {
@@ -29,20 +35,22 @@ class NotePositionalDataSource() : PositionalDataSource<Note>() {
     lateinit var db: RoomService
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Note>) {
-        Log.i("code", "range filter $filter")
-        if (filter) {
-            db.getFilterRange(time, longInterval, moment, params, callback)
-        } else {
-            db.getRange(params, callback)
+        when(type) {
+            0 -> db.getRange(params, callback)
+            1 -> db.getRangeFilterMoment(afterSleep, params, callback)
+            2 -> db.getRangeFilterPeriod(beginPeriod, params, callback)
+            3 -> db.getRangeFilterAll(beginPeriod, afterSleep, params, callback)
         }
+        //db.getRange(params, callback)
     }
 
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Note>) {
-        Log.i("code", "range filter $filter")
-        if (!filter) {
-            db.getFirstPage(params, callback)
-        } else {
-            db.getFilterFirstPage(time, longInterval, moment, params, callback)
+        when(type) {
+            0 -> db.getFirstPage(params, callback)
+            1 -> db.getFirstPageFilterMoment(afterSleep, params, callback)
+            2 -> db.getFirstPageFilterPeriod(beginPeriod, params, callback)
+            3 -> db.getFirstPageFilterAll(beginPeriod, afterSleep, params, callback)
         }
+        //db.getFirstPage(params, callback)
     }
 }

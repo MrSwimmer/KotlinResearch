@@ -180,8 +180,8 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
         updateMoment(moment)
         updatePeriod(currentPeriod)
         if (currentPeriod == 4)
-            presenter.setFilterPagingRecyclerData(currentPeriod - 1, moment)
+            presenter.setRecyclerData(currentPeriod - 1, moment)
         else
-            presenter.setFilterPagingRecyclerData(currentPeriod, moment)
+            presenter.setRecyclerData(currentPeriod, moment)
     }
 }

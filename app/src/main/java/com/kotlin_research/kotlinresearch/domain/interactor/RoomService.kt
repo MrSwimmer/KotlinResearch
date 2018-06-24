@@ -67,16 +67,7 @@ class RoomService(var db: NoteDao) {
         db.getPage(params.startPosition, params.loadSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                    override fun onSuccess(t: List<Note>) {
-                        Log.i("code", "load range ${t.size}")
-                        callback.onResult(t)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.i("code", "error ${e.message}")
-                    }
-                })
+                .subscribe(CallBackFabric.getNotePageCallback(callback))
     }
 
     fun getFirstPage(params: PositionalDataSource.LoadInitialParams, callback: PositionalDataSource.LoadInitialCallback<Note>) {
