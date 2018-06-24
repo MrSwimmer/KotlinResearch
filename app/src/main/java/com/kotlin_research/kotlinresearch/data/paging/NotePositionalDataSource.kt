@@ -41,7 +41,6 @@ class NotePositionalDataSource() : PositionalDataSource<Note>() {
             2 -> db.getRangeFilterPeriod(beginPeriod, params, callback)
             3 -> db.getRangeFilterAll(beginPeriod, afterSleep, params, callback)
         }
-        //db.getRange(params, callback)
     }
 
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Note>) {
@@ -51,6 +50,5 @@ class NotePositionalDataSource() : PositionalDataSource<Note>() {
             2 -> db.getFirstPageFilterPeriod(beginPeriod, params, callback)
             3 -> db.getFirstPageFilterAll(beginPeriod, afterSleep, params, callback)
         }
-        //db.getFirstPage(params, callback)
     }
 }

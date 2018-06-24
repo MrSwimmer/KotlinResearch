@@ -2,7 +2,6 @@ package com.kotlin_research.kotlinresearch.presentation.settings
 
 import android.arch.paging.PagedList
 import android.graphics.Color
-import android.opengl.Visibility
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutManager
@@ -83,7 +82,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
     }
 
     override fun setAdapter(pagedList: PagedList<Note>) {
-        val adapter = NotePagingAdapter(NoteDiffUtilCallback())
+        val adapter = NotePagingAdapter(NoteDiffUtilCallback(), router)
         adapter.submitList(pagedList)
         recyclerView.adapter = adapter
     }
