@@ -69,11 +69,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
 
     override fun onAttach(view: View) {
         super.onAttach(view)
-        Log.i("code", "attach")
-        //presenter.setPagingRecyclerData()
-        updatePeriod(currentPeriod)
-        updateMoment(moment)
-        setData()
+        updateData()
     }
 
     @OnClick(R.id.notes_fab)
@@ -98,16 +94,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
         }
     }
 
-    private fun setData() {
-        if (filter) {
-            presenter.setFilterPagingRecyclerData(currentPeriod, moment)
-        } else {
-            presenter.setPagingRecyclerData()
-        }
-    }
-
     private fun updatePeriod(period: Int) {
-        currentPeriod = period
         val grey = Color.parseColor("#848484")
         val red = Color.parseColor("#d7443c")
         periodAll.setTextColor(grey)
@@ -136,55 +123,65 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
                 periodWeek.textSize = 21f
             }
         }
-        if (period == 4)
-            presenter.setFilterPagingRecyclerData(period - 1, moment)
-        else
-            presenter.setFilterPagingRecyclerData(period, moment)
     }
 
     @OnClick(R.id.notes_period_all)
     fun onPeriodAllClick() {
         Log.i("code", periodAll.textSize.toString())
-        if (periodAll.textSize != 42.0f)
-            updatePeriod(0)
+        if (periodAll.textSize != 42.0f) {
+            currentPeriod = 0
+            updateData()
+        }
     }
 
     @OnClick(R.id.notes_period_year)
     fun onPeriodYearClick() {
-        if (periodYear.textSize != 42.0f)
-            updatePeriod(1)
+        if (periodYear.textSize != 42.0f) {
+            currentPeriod = 1
+            updateData()
+        }
     }
 
     @OnClick(R.id.notes_period_month)
     fun onPeriodMonthClick() {
-        if (periodMonth.textSize != 42.0f)
-            updatePeriod(2)
+        if (periodMonth.textSize != 42.0f){
+            currentPeriod = 2
+            updateData()
+        }
     }
 
     @OnClick(R.id.notes_period_week)
     fun onPeriodWeekClick() {
-        if (periodWeek.textSize != 42.0f)
-            updatePeriod(3)
+        if (periodWeek.textSize != 42.0f){
+            currentPeriod = 3
+            updateData()
+        }
     }
 
     @OnClick(R.id.notes_train_image)
     fun onTrainClick() {
         moment = 1
-        updateMoment(moment)
-        presenter.setFilterPagingRecyclerData(currentPeriod, moment)
+        updateData()
     }
 
     @OnClick(R.id.notes_sleep_image)
     fun onSleepClick() {
         moment = 0
-        updateMoment(moment)
-        presenter.setFilterPagingRecyclerData(currentPeriod, moment)
+        updateData()
     }
 
     @OnClick(R.id.notes_all_image)
     fun onAllClick() {
         moment = 2
+        updateData()
+    }
+
+    private fun updateData() {
         updateMoment(moment)
-        presenter.setFilterPagingRecyclerData(currentPeriod, moment)
+        updatePeriod(currentPeriod)
+        if (currentPeriod == 4)
+            presenter.setFilterPagingRecyclerData(currentPeriod - 1, moment)
+        else
+            presenter.setFilterPagingRecyclerData(currentPeriod, moment)
     }
 }
