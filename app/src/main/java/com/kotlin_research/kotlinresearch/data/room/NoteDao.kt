@@ -13,9 +13,6 @@ interface NoteDao {
     @Insert
     fun insert(note: Note)
 
-    @Query("SELECT * FROM notes")
-    fun getAll(): Flowable<List<Note>>
-
     @Query("SELECT * FROM notes WHERE id = :id")
     fun getById(id: Long): Note
 
@@ -24,27 +21,6 @@ interface NoteDao {
 
     @Update
     fun update(note: Note)
-
-    @Query("SELECT * FROM notes LIMIT :begin, :count")
-    fun getPage(begin: Int, count: Int): Single<List<Note>>
-
-    @Query("SELECT * FROM notes LIMIT :count")
-    fun getFirstPage(count: Int): Single<List<Note>>
-
-    @Query("SELECT * FROM notes WHERE date >= :begin AND afterSleep = :afterSleep")
-    fun getIntervalWithFilter(begin: Long, afterSleep: Boolean): Single<List<Note>>
-
-    @Query("SELECT * FROM notes WHERE date >= :begin")
-    fun getIntervalAll(begin: Long): Single<List<Note>>
-
-    @Query("SELECT * FROM notes WHERE date >= :begin LIMIT :begin, :count")
-    fun getFilterPage(begin: Int, count: Int): Single<List<Note>>
-
-    @Query("SELECT * FROM notes WHERE date >= :begin AND afterSleep = :afterSleep LIMIT :begin, :count")
-    fun getFilterPageWithMoment(begin: Int, count: Int, afterSleep: Boolean): Single<List<Note>>
-
-    @Query("SELECT * FROM notes LIMIT :count")
-    fun getFilterFirstPage(count: Int): Single<List<Note>>
 
     //new room
     //statistic
@@ -59,4 +35,31 @@ interface NoteDao {
 
     @Query("SELECT * FROM notes WHERE date >= :beginPeriod AND afterSleep = :afterSleep")
     fun getIntervalFilterAll(beginPeriod: Long, afterSleep: Boolean): Single<List<Note>>
+
+    //page
+    //range
+    @Query("SELECT * FROM notes LIMIT :startPosition, :loadSize")
+    fun getPage(startPosition: Int, loadSize: Int): Single<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE afterSleep = :afterSleep LIMIT :startPosition, :loadSize")
+    fun getPageFilterMoment(afterSleep: Boolean, startPosition: Int, loadSize: Int): Single<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE date >= :beginPeriod LIMIT :startPosition, :loadSize")
+    fun getPageFilterPeriod(beginPeriod: Long, startPosition: Int, loadSize: Int): Single<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE date >= :beginPeriod AND afterSleep = :afterSleep LIMIT :startPosition, :loadSize")
+    fun getPageFilterAll(beginPeriod: Long, afterSleep: Boolean, startPosition: Int, loadSize: Int): Single<List<Note>>
+
+    //first page
+    @Query("SELECT * FROM notes LIMIT :pageSize")
+    fun getFirstPage(pageSize: Int): Single<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE afterSleep = :afterSleep LIMIT :pageSize")
+    fun getFirstPageFilterMoment(afterSleep: Boolean, pageSize: Int): Single<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE date >= :beginPeriod LIMIT :pageSize")
+    fun getFirstPageFilterPeriod(beginPeriod: Long, pageSize: Int): Single<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE date >= :beginPeriod AND afterSleep = :afterSleep LIMIT :pageSize")
+    fun getFirstPageFilterAll(beginPeriod: Long, afterSleep: Boolean, pageSize: Int): Single<List<Note>>
 }

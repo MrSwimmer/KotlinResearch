@@ -12,7 +12,11 @@ import rx.Observable
 import rx.Subscriber
 
 class RoomService(var db: NoteDao) {
-
+    /*fun setCallback(a: Single<List<Note>>, callback: NotesCallback) {
+            a.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(CallBackFabric.getNoteCallback(callback))
+        }*/
     fun getInterval(callback: NotesCallback) {
         db.getInterval()
                 .subscribeOn(Schedulers.io())
@@ -70,96 +74,54 @@ class RoomService(var db: NoteDao) {
                 .subscribe(CallBackFabric.getNotePageCallback(callback))
     }
 
+    fun getRangeFilterMoment(afterSleep: Boolean, params: PositionalDataSource.LoadRangeParams, callback: PositionalDataSource.LoadRangeCallback<Note>) {
+        db.getPageFilterMoment(afterSleep, params.startPosition, params.loadSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNotePageCallback(callback))
+    }
+
+    fun getRangeFilterPeriod(beginPeriod: Long, params: PositionalDataSource.LoadRangeParams, callback: PositionalDataSource.LoadRangeCallback<Note>) {
+        db.getPageFilterPeriod(beginPeriod, params.startPosition, params.loadSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNotePageCallback(callback))
+    }
+
+    fun getRangeFilterAll(beginPeriod: Long, afterSleep: Boolean, params: PositionalDataSource.LoadRangeParams, callback: PositionalDataSource.LoadRangeCallback<Note>) {
+        db.getPageFilterAll(beginPeriod, afterSleep, params.startPosition, params.loadSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNotePageCallback(callback))
+    }
+
     fun getFirstPage(params: PositionalDataSource.LoadInitialParams, callback: PositionalDataSource.LoadInitialCallback<Note>) {
         db.getFirstPage(params.pageSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                    override fun onSuccess(t: List<Note>) {
-                        Log.i("code", "first load range ${t.size}")
-                        callback.onResult(t, 0)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.i("code", "first error ${e.message}")
-                    }
-                })
+                .subscribe(CallBackFabric.getNoteFirstPageCallback(callback))
     }
 
-    fun getFilterRange(today: Long, interval: Long, afterSleep: Int, params: PositionalDataSource.LoadRangeParams, callback: PositionalDataSource.LoadRangeCallback<Note>) {
-        var afterSleepBool = false
-        when (afterSleep) {
-            0 -> afterSleepBool = true
-            1 -> afterSleepBool = false
-            2 -> {
-                db.getFilterPage(params.startPosition, params.loadSize)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                            override fun onSuccess(t: List<Note>) {
-                                Log.i("code", "load range ${t.size}")
-                                callback.onResult(t)
-                            }
-
-                            override fun onError(e: Throwable) {
-                                Log.i("code", "error ${e.message}")
-                            }
-                        })
-                return
-            }
-        }
-        db.getFilterPageWithMoment(params.startPosition, params.loadSize, afterSleepBool)
+    fun getFirstPageFilterMoment(afterSleep: Boolean, params: PositionalDataSource.LoadInitialParams, callback: PositionalDataSource.LoadInitialCallback<Note>) {
+        db.getFirstPageFilterMoment(afterSleep, params.pageSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                    override fun onSuccess(t: List<Note>) {
-                        Log.i("code", "load range ${t.size}")
-                        callback.onResult(t)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.i("code", "error ${e.message}")
-                    }
-                })
+                .subscribe(CallBackFabric.getNoteFirstPageCallback(callback))
     }
 
-    fun getFilterFirstPage(time: Long, longInterval: Long, afterSleep: Int, params: PositionalDataSource.LoadInitialParams, callback: PositionalDataSource.LoadInitialCallback<Note>) {
-        var afterSleepBool = false
-        when (afterSleep) {
-            0 -> afterSleepBool = true
-            1 -> afterSleepBool = false
-            2 -> {
-                db.getFilterFirstPage(params.pageSize)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                            override fun onSuccess(t: List<Note>) {
-                                Log.i("code", "first load range ${t.size}")
-                                callback.onResult(t, 0)
-                            }
-
-                            override fun onError(e: Throwable) {
-                                Log.i("code", "first error ${e.message}")
-                            }
-                        })
-                return
-            }
-            /*db.getFilterFirstPageWithMoment(params.pageSize, time, longInterval, afterSleepBool)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                        override fun onSuccess(t: List<Note>) {
-                            Log.i("code", "first load range ${t.size}")
-                            callback.onResult(t, 0)
-                        }
-
-                        override fun onError(e: Throwable) {
-                            Log.i("code", "first error ${e.message}")
-                        }
-                    })*/
-        }
+    fun getFirstPageFilterPeriod(beginPeriod: Long, params: PositionalDataSource.LoadInitialParams, callback: PositionalDataSource.LoadInitialCallback<Note>) {
+        db.getFirstPageFilterPeriod(beginPeriod, params.pageSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNoteFirstPageCallback(callback))
     }
 
+    fun getFirstPageFilterAll(beginPeriod: Long, afterSleep: Boolean, params: PositionalDataSource.LoadInitialParams, callback: PositionalDataSource.LoadInitialCallback<Note>) {
+        db.getFirstPageFilterAll(beginPeriod, afterSleep, params.pageSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNoteFirstPageCallback(callback))
+    }
 
     interface NotesCallback {
         fun onSuccess(notes: List<Note>)
