@@ -44,5 +44,19 @@ interface NoteDao {
     fun getFilterPageWithMoment(begin: Int, count: Int, afterSleep: Boolean): Single<List<Note>>
 
     @Query("SELECT * FROM notes LIMIT :count")
-    fun getFilterFirstPage(count: Int, begin: Long, longInterval: Long): Single<List<Note>>
+    fun getFilterFirstPage(count: Int): Single<List<Note>>
+
+    //new room
+    //statistic
+    @Query("SELECT * FROM notes")
+    fun getInterval(): Single<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE afterSleep = :afterSleep")
+    fun getIntervalFilterMoment(afterSleep: Boolean): Single<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE date >= :beginPeriod")
+    fun getIntervalFilterPeriod(beginPeriod: Long): Single<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE date >= :beginPeriod AND afterSleep = :afterSleep")
+    fun getIntervalFilterAll(beginPeriod: Long, afterSleep: Boolean): Single<List<Note>>
 }

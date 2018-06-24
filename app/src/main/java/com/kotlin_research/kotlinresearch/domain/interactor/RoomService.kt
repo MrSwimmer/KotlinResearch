@@ -4,6 +4,7 @@ import android.arch.paging.PositionalDataSource
 import android.util.Log
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.data.room.NoteDao
+import com.kotlin_research.kotlinresearch.domain.CallBackFabric
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -12,40 +13,32 @@ import rx.Subscriber
 
 class RoomService(var db: NoteDao) {
 
-    fun getInterval(today: Long, interval: Long, afterSleep: Int, callback: NotesCallback) {
-        var afterSleepBool = false
-        when (afterSleep) {
-            0 -> afterSleepBool = true
-            1 -> afterSleepBool = false
-            2 -> {
-                db.getIntervalAll(today - interval)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                            override fun onSuccess(notes: List<Note>) {
-                                callback.onSuccess(notes)
-                            }
-
-                            override fun onError(e: Throwable) {
-                                callback.onError(e)
-                            }
-                        })
-                return
-            }
-        }
-        db.getIntervalWithFilter(today - interval, afterSleepBool)
+    fun getInterval(callback: NotesCallback) {
+        db.getInterval()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DisposableSingleObserver<List<Note>>() {
-                    override fun onSuccess(notes: List<Note>) {
-                        callback.onSuccess(notes)
-                    }
+                .subscribe(CallBackFabric.getNoteCallback(callback))
+    }
 
-                    override fun onError(e: Throwable) {
-                        callback.onError(e)
-                    }
-                })
+    fun getIntervalFilterMoment(afterSleep: Boolean, callback: NotesCallback) {
+        db.getIntervalFilterMoment(afterSleep)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNoteCallback(callback))
+    }
 
+    fun getIntervalFilterPeriod(beginPeriod: Long, callback: NotesCallback) {
+        db.getIntervalFilterPeriod(beginPeriod)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNoteCallback(callback))
+    }
+
+    fun getIntervalFilterAll(beginPeriod: Long, afterSleep: Boolean, callback: NotesCallback) {
+        db.getIntervalFilterAll(beginPeriod, afterSleep)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNoteCallback(callback))
     }
 
     fun addNote(note: Note, callback: AddNoteCallback) {
@@ -145,7 +138,7 @@ class RoomService(var db: NoteDao) {
             0 -> afterSleepBool = true
             1 -> afterSleepBool = false
             2 -> {
-                db.getFilterFirstPage(params.pageSize, time, longInterval)
+                db.getFilterFirstPage(params.pageSize)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(object : DisposableSingleObserver<List<Note>>() {
@@ -160,7 +153,7 @@ class RoomService(var db: NoteDao) {
                         })
                 return
             }
-            db.getFilterFirstPageWithMoment(params.pageSize, time, longInterval, afterSleepBool)
+            /*db.getFilterFirstPageWithMoment(params.pageSize, time, longInterval, afterSleepBool)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : DisposableSingleObserver<List<Note>>() {
@@ -172,7 +165,7 @@ class RoomService(var db: NoteDao) {
                         override fun onError(e: Throwable) {
                             Log.i("code", "first error ${e.message}")
                         }
-                    })
+                    })*/
         }
     }
 

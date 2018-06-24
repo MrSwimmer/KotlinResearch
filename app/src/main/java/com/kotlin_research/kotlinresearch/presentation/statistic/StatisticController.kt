@@ -18,6 +18,7 @@ import org.eazegraph.lib.charts.PieChart
 import org.eazegraph.lib.charts.ValueLineChart
 import org.eazegraph.lib.models.PieModel
 import org.eazegraph.lib.models.ValueLineSeries
+import javax.annotation.Nullable
 import kotlin.collections.ArrayList
 
 class StatisticController : MvpController<StatisticContract.View, StatisticContract.Presenter>(), StatisticContract.View {
@@ -88,6 +89,7 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
         }
     }
 
+    @Nullable
     @OnClick(R.id.statistic_period_all)
     fun onPeriodAllClick() {
         Log.i("code", periodAll.textSize.toString())
@@ -95,24 +97,28 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
             updatePeriod(0)
     }
 
+    @Nullable
     @OnClick(R.id.statistic_period_year)
     fun onPeriodYearClick() {
         if (periodYear.textSize != 42.0f)
             updatePeriod(1)
     }
 
+    @Nullable
     @OnClick(R.id.statistic_period_month)
     fun onPeriodMonthClick() {
         if (periodMonth.textSize != 42.0f)
             updatePeriod(2)
     }
 
+    @Nullable
     @OnClick(R.id.statistic_period_week)
     fun onPeriodWeekClick() {
         if (periodWeek.textSize != 42.0f)
             updatePeriod(3)
     }
 
+    @Nullable
     @OnClick(R.id.statistic_train_image)
     fun onTrainClick() {
         moment = 1
@@ -120,6 +126,7 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
         presenter.getDataForChart(currentPeriod, moment)
     }
 
+    @Nullable
     @OnClick(R.id.statistic_sleep_image)
     fun onSleepClick() {
         moment = 0
@@ -127,6 +134,7 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
         presenter.getDataForChart(currentPeriod, moment)
     }
 
+    @Nullable
     @OnClick(R.id.statistic_all_image)
     fun onAllClick() {
         moment = 2

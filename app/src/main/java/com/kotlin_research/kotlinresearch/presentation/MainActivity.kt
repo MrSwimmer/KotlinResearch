@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         ButterKnife.bind(this)
         router = Conductor.attachRouter(this, mainFrameLayout, savedInstanceState)
         if (!router.hasRootController())
-            router.setRoot(RouterTransaction.with(NotesController()))
+            router.setRoot(RouterTransaction.with(StatisticController()))
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 

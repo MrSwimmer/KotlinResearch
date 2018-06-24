@@ -22,43 +22,65 @@ class StatisticPresenter : MvpBasePresenter<StatisticContract.View>(), Statistic
         App.getComponent().inject(this)
     }
 
-    override fun getDataForChart(period: Int, afterSleep: Int) {
-        roomService.getInterval(Date().time, getLongInterval(period), afterSleep, object : RoomService.NotesCallback {
-            override fun onSuccess(notes: List<Note>) {
-                val lineSeries = ValueLineSeries()
-                val zones = Array(4, { 0 })
-                lineSeries.color = Color.parseColor("#d7443c")
-                lineSeries.widthOffset = 0.5f
-                notes.forEach {
-                    val date = Date(it.date)
-                    val day = date.day
-                    val month = date.month
-                    val sDay: String
-                    val sMonth: String
-                    zones[it.zone - 1]++
-                    sDay = if (day < 10)
-                        "0$day"
-                    else
-                        "$day"
-                    sMonth = if (month < 10)
-                        "0$month"
-                    else
-                        "$month"
-                    lineSeries.addPoint(ValueLinePoint("$sDay.$sMonth", it.points.toFloat()))
-                }
-                val pieSeries: ArrayList<PieModel> = ArrayList()
-                pieSeries.add(PieModel("I", zones[0].toFloat(), Color.parseColor("#c0e637")))
-                pieSeries.add(PieModel("II", zones[1].toFloat(), Color.parseColor("#55bbeb")))
-                pieSeries.add(PieModel("III", zones[2].toFloat(), Color.parseColor("#f0d73c")))
-                pieSeries.add(PieModel("IV", zones[3].toFloat(), Color.parseColor("#d7443c")))
-                view.setPieChart(pieSeries)
-                view.setLineChartData(lineSeries)
-            }
+    override fun getDataForChart(period: Int, moment: Int) {
+        val today = Date().time
+        val beginPeriod = today - getLongInterval(period)
+        val withPeriod = period != 0
+        val withMoment = moment != 2
+        var afterSleep = true
+        when (moment) {
+            0 -> afterSleep = true
+            1 -> afterSleep = false
+        }
+        if (withPeriod) {
+            if (withMoment)
+                roomService.getIntervalFilterAll(beginPeriod, afterSleep, callback)
+            else
+                roomService.getIntervalFilterPeriod(beginPeriod, callback)
+        } else {
+            if (withMoment)
+                roomService.getIntervalFilterMoment(afterSleep, callback)
+            else
+                roomService.getInterval(callback)
+        }
+    }
 
-            override fun onError(e: Throwable) {
-                Log.i("code", "error get Week " + e.message)
+    private var callback = object : RoomService.NotesCallback {
+        override fun onSuccess(notes: List<Note>) {
+            val lineSeries = ValueLineSeries()
+            val zones = Array(4, { 0 })
+            lineSeries.color = Color.parseColor("#d7443c")
+            lineSeries.widthOffset = 0.5f
+            notes.forEach {
+                val date = Date(it.date)
+                val day = date.day
+                val month = date.month
+                val sDay: String
+                val sMonth: String
+                zones[it.zone - 1]++
+                sDay = if (day < 10)
+                    "0$day"
+                else
+                    "$day"
+                sMonth = if (month < 10)
+                    "0$month"
+                else
+                    "$month"
+                lineSeries.addPoint(ValueLinePoint("$sDay.$sMonth", it.points.toFloat()))
             }
-        })
+            val pieSeries: ArrayList<PieModel> = ArrayList()
+            pieSeries.add(PieModel("I", zones[0].toFloat(), Color.parseColor("#c0e637")))
+            pieSeries.add(PieModel("II", zones[1].toFloat(), Color.parseColor("#55bbeb")))
+            pieSeries.add(PieModel("III", zones[2].toFloat(), Color.parseColor("#f0d73c")))
+            pieSeries.add(PieModel("IV", zones[3].toFloat(), Color.parseColor("#d7443c")))
+            view.setPieChart(pieSeries)
+            view.setLineChartData(lineSeries)
+        }
+
+        override fun onError(e: Throwable) {
+            Log.i("code", "error get Week " + e.message)
+        }
+
     }
 
     private fun getLongInterval(period: Int): Long {
