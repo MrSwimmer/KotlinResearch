@@ -2,6 +2,7 @@ package com.kotlin_research.kotlinresearch.presentation.settings
 
 import android.arch.paging.PagedList
 import android.graphics.Color
+import android.opengl.Visibility
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutManager
@@ -54,6 +55,10 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
     lateinit var momentSleep: ImageView
     @BindView(R.id.notes_train_image)
     lateinit var momentTrain: ImageView
+
+    //panel open filter panel
+    @BindView(R.id.notes_show_hide_image)
+    lateinit var arrowImage: ImageView
 
     override fun createPresenter(): NotesContract.Presenter {
         return NotesPresenter()
@@ -144,7 +149,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
 
     @OnClick(R.id.notes_period_month)
     fun onPeriodMonthClick() {
-        if (periodMonth.textSize != 42.0f){
+        if (periodMonth.textSize != 42.0f) {
             currentPeriod = 2
             updateData()
         }
@@ -152,7 +157,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
 
     @OnClick(R.id.notes_period_week)
     fun onPeriodWeekClick() {
-        if (periodWeek.textSize != 42.0f){
+        if (periodWeek.textSize != 42.0f) {
             currentPeriod = 3
             updateData()
         }
@@ -183,5 +188,19 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
             presenter.setRecyclerData(currentPeriod - 1, moment)
         else
             presenter.setRecyclerData(currentPeriod, moment)
+    }
+
+    @OnClick(R.id.notes_show_hide_filter)
+    fun onShowFilterClick() {
+        if (filter) {
+            filterLayout.visibility = View.GONE
+            arrowImage.setImageResource(R.drawable.ic_arrow_open_filter)
+        }
+        else {
+            filterLayout.visibility = View.VISIBLE
+            arrowImage.setImageResource(R.drawable.ic_arrow_filter_close)
+        }
+
+        filter = !filter
     }
 }
