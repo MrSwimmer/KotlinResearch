@@ -73,9 +73,7 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
 
     override fun onAttach(view: View) {
         super.onAttach(view)
-        Log.i("code", "on attach $currentPeriod")
-        updatePeriod(currentPeriod)
-        updateMoment(moment)
+        updateData()
     }
 
     private fun updateMoment(moment: Int) {
@@ -93,58 +91,62 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
     @OnClick(R.id.statistic_period_all)
     fun onPeriodAllClick() {
         Log.i("code", periodAll.textSize.toString())
-        if (periodAll.textSize != 42.0f)
-            updatePeriod(0)
+        if (periodAll.textSize != 42.0f) {
+            currentPeriod = 0
+            updateData()
+        }
     }
 
     @Nullable
     @OnClick(R.id.statistic_period_year)
     fun onPeriodYearClick() {
-        if (periodYear.textSize != 42.0f)
-            updatePeriod(1)
+        if (periodYear.textSize != 42.0f) {
+            currentPeriod = 1
+            updateData()
+        }
     }
 
     @Nullable
     @OnClick(R.id.statistic_period_month)
     fun onPeriodMonthClick() {
-        if (periodMonth.textSize != 42.0f)
-            updatePeriod(2)
+        if (periodMonth.textSize != 42.0f) {
+            currentPeriod = 2
+            updateData()
+        }
     }
 
     @Nullable
     @OnClick(R.id.statistic_period_week)
     fun onPeriodWeekClick() {
-        if (periodWeek.textSize != 42.0f)
-            updatePeriod(3)
+        if (periodWeek.textSize != 42.0f) {
+            currentPeriod = 3
+            updateData()
+        }
     }
 
     @Nullable
     @OnClick(R.id.statistic_train_image)
     fun onTrainClick() {
         moment = 1
-        updateMoment(moment)
-        presenter.getDataForChart(currentPeriod, moment)
+        updateData()
     }
 
     @Nullable
     @OnClick(R.id.statistic_sleep_image)
     fun onSleepClick() {
         moment = 0
-        updateMoment(moment)
-        presenter.getDataForChart(currentPeriod, moment)
+        updateData()
     }
 
     @Nullable
     @OnClick(R.id.statistic_all_image)
     fun onAllClick() {
         moment = 2
-        updateMoment(moment)
-        presenter.getDataForChart(currentPeriod, moment)
+        updateData()
     }
 
     @SuppressLint("ResourceAsColor")
     private fun updatePeriod(period: Int) {
-        currentPeriod = period
         val grey = Color.parseColor("#848484")
         val red = Color.parseColor("#d7443c")
         periodAll.setTextColor(grey)
@@ -173,9 +175,14 @@ class StatisticController : MvpController<StatisticContract.View, StatisticContr
                 periodWeek.textSize = 21f
             }
         }
-        if (period == 4)
-            presenter.getDataForChart(period - 1, moment)
+    }
+
+    private fun updateData() {
+        updateMoment(moment)
+        updatePeriod(currentPeriod)
+        if (currentPeriod == 4)
+            presenter.getDataForChart(currentPeriod - 1, moment)
         else
-            presenter.getDataForChart(period, moment)
+            presenter.getDataForChart(currentPeriod, moment)
     }
 }
