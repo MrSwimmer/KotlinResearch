@@ -5,6 +5,7 @@ import android.util.Log
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.data.room.NoteDao
 import com.kotlin_research.kotlinresearch.domain.CallBackFabric
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -12,11 +13,12 @@ import rx.Observable
 import rx.Subscriber
 
 class RoomService(var db: NoteDao) {
-    /*fun setCallback(a: Single<List<Note>>, callback: NotesCallback) {
-            a.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(CallBackFabric.getNoteCallback(callback))
-        }*/
+    fun setCallback(a: Single<List<Note>>, callback: NotesCallback) {
+        a.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNoteCallback(callback))
+    }
+
     fun getInterval(callback: NotesCallback) {
         db.getInterval()
                 .subscribeOn(Schedulers.io())
@@ -66,6 +68,35 @@ class RoomService(var db: NoteDao) {
 
                 })
     }
+
+    fun deleteAll(callback: AddNoteCallback) {
+        Observable.create(Observable.OnSubscribe<String> { subscriber ->
+            db.deleteAll()
+            subscriber.onCompleted()
+        })
+                .subscribeOn(rx.schedulers.Schedulers.io())
+                .observeOn(rx.android.schedulers.AndroidSchedulers.mainThread())
+                .subscribe(object : Subscriber<String>() {
+                    override fun onNext(t: String?) {
+                    }
+
+                    override fun onCompleted() {
+                        callback.onSuccess()
+                    }
+
+                    override fun onError(e: Throwable) {
+                        callback.onError(e)
+                    }
+
+                })
+    }
+
+    /*fun deleteAll(callback: NotesCallback) {
+        db.deleteAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNoteCallback(callback))
+    }*/
 
     fun getRange(params: PositionalDataSource.LoadRangeParams, callback: PositionalDataSource.LoadRangeCallback<Note>) {
         db.getPage(params.startPosition, params.loadSize)
