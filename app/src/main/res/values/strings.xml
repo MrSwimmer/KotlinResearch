@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Kotlin Research</string>
+    <string name="version">О версии 1.0</string>
+    <string name="about_version">Что-то</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="zone_1t">I зона («востановительная»)</string>
     <string name="zone_1">Нет признаков напряжения в работе функциональных систем</string>

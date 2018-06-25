@@ -12,6 +12,9 @@ import butterknife.OnClick
 import com.hannesdorfmann.mosby3.mvp.conductor.MvpController
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
+import android.content.Intent
+import android.net.Uri
+
 
 class SettingsController : MvpController<SettingsContract.View, SettingsContract.Presenter>(), SettingsContract.View {
 
@@ -32,13 +35,33 @@ class SettingsController : MvpController<SettingsContract.View, SettingsContract
                 .setTitle("Удаление всех записей")
                 .setMessage("Вы действительно удалить все записи?")
                 .setPositiveButton("Да", { dialog, _ ->
-                    run {
-                        presenter.deleteAll()
-                        dialog.cancel()
-                    }
+                    presenter.deleteAll()
+                    dialog.cancel()
                 })
                 .setNegativeButton("Нет", { dialog, _ -> dialog.cancel() })
                 .create()
                 .show()
     }
+
+    @OnClick(R.id.settings_version)
+    fun onVersionClick() {
+        val title = activity!!.getString(R.string.version)
+        val text = activity!!.getString(R.string.about_version)
+        AlertDialog.Builder(activity)
+                .setTitle(title)
+                .setMessage(text)
+                .setPositiveButton("Ок", { dialog, _ ->
+                    dialog.cancel()
+                })
+                .create()
+                .show()
+    }
+
+    @OnClick(R.id.settings_set_mark_in_play)
+    fun onSetMarkClick() {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("market://details?id=com.bignerdranch.android.OSM")
+        startActivity(intent)
+    }
+
 }

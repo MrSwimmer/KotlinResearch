@@ -5,6 +5,7 @@ import android.util.Log
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.domain.interactor.RoomService
 import io.reactivex.observers.DisposableSingleObserver
+import rx.Subscriber
 
 class CallBackFabric {
     companion object {
@@ -42,6 +43,22 @@ class CallBackFabric {
                 override fun onError(e: Throwable) {
                     Log.i("code", "first error ${e.message}")
                 }
+            }
+        }
+
+        fun getCallback(callback: RoomService.EditNoteCallback): Subscriber<String> {
+            return object : Subscriber<String>() {
+                override fun onNext(t: String?) {
+                }
+
+                override fun onCompleted() {
+                    callback.onSuccess()
+                }
+
+                override fun onError(e: Throwable) {
+                    callback.onError(e)
+                }
+
             }
         }
     }

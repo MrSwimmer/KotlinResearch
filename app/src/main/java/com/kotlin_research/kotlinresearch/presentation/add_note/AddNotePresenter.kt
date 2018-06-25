@@ -40,7 +40,7 @@ class AddNotePresenter : MvpBasePresenter<AddNoteContract.View>(), AddNoteContra
     }
 
     override fun addNote(note: Note) {
-        db.addNote(note, object : RoomService.AddNoteCallback {
+        db.addNote(note, object : RoomService.EditNoteCallback {
             override fun onSuccess() {
                 view.gotoResult(note)
             }

@@ -3,7 +3,6 @@ package com.kotlin_research.kotlinresearch.presentation.settings
 import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.kotlin_research.kotlinresearch.App
-import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.domain.interactor.RoomService
 import javax.inject.Inject
 
@@ -17,7 +16,7 @@ class SettingsPresenter : MvpBasePresenter<SettingsContract.View>(), SettingsCon
     }
 
     override fun deleteAll() {
-        roomService.deleteAll(object : RoomService.AddNoteCallback {
+        roomService.deleteAll(object : RoomService.EditNoteCallback {
             override fun onSuccess() {
                 Log.i("code", "success delete all")
             }
