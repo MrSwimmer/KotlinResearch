@@ -1,12 +1,9 @@
-package com.kotlin_research.kotlinresearch.presentation.settings
+package com.kotlin_research.kotlinresearch.presentation.main.settings
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.hannesdorfmann.mosby3.mvp.conductor.MvpController
@@ -14,6 +11,7 @@ import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
 import android.content.Intent
 import android.net.Uri
+import com.kotlin_research.kotlinresearch.presentation.auth.AuthActivity
 
 
 class SettingsController : MvpController<SettingsContract.View, SettingsContract.Presenter>(), SettingsContract.View {
@@ -64,4 +62,9 @@ class SettingsController : MvpController<SettingsContract.View, SettingsContract
         startActivity(intent)
     }
 
+    @OnClick(R.id.settings_auth)
+    fun onAuthClick() {
+        val intent = Intent(activity, AuthActivity::class.java)
+        startActivity(intent)
+    }
 }

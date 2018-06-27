@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.presentation
+package com.kotlin_research.kotlinresearch.presentation.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,8 +11,8 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.kotlin_research.kotlinresearch.R
 import com.kotlin_research.kotlinresearch.presentation.settings.NotesController
-import com.kotlin_research.kotlinresearch.presentation.settings.SettingsController
-import com.kotlin_research.kotlinresearch.presentation.statistic.StatisticController
+import com.kotlin_research.kotlinresearch.presentation.main.settings.SettingsController
+import com.kotlin_research.kotlinresearch.presentation.main.statistic.StatisticController
 
 class MainActivity : AppCompatActivity() {
 

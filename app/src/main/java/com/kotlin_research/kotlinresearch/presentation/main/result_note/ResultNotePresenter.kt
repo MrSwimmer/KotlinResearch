@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.presentation.result_note
+package com.kotlin_research.kotlinresearch.presentation.main.result_note
 
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.kotlin_research.kotlinresearch.App

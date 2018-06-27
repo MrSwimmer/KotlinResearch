@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.presentation.statistic
+package com.kotlin_research.kotlinresearch.presentation.main.statistic
 
 import android.graphics.Color
 import android.util.Log

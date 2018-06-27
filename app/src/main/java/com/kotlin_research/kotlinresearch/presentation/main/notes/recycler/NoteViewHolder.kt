@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.presentation.notes.recycler
+package com.kotlin_research.kotlinresearch.presentation.main.notes.recycler
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.presentation.add_note
+package com.kotlin_research.kotlinresearch.presentation.main.add_note
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,7 @@ import com.hannesdorfmann.mosby3.mvp.conductor.MvpController
 import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
 import com.kotlin_research.kotlinresearch.data.room.Note
-import com.kotlin_research.kotlinresearch.presentation.result_note.ResultNoteController
+import com.kotlin_research.kotlinresearch.presentation.main.result_note.ResultNoteController
 import java.util.*
 
 class AddNoteController : MvpController<AddNoteContract.View, AddNoteContract.Presenter>(), AddNoteContract.View {

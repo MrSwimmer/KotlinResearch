@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.presentation.settings
+package com.kotlin_research.kotlinresearch.presentation.main.settings
 
 import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter

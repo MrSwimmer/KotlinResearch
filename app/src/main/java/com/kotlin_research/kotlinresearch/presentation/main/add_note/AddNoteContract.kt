@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.presentation.add_note
+package com.kotlin_research.kotlinresearch.presentation.main.add_note
 
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter
 import com.hannesdorfmann.mosby3.mvp.MvpView

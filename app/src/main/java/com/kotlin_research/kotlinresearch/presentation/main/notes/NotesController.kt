@@ -21,8 +21,8 @@ import com.kotlin_research.kotlinresearch.App
 import com.kotlin_research.kotlinresearch.R
 import com.kotlin_research.kotlinresearch.data.paging.NoteDiffUtilCallback
 import com.kotlin_research.kotlinresearch.data.room.Note
-import com.kotlin_research.kotlinresearch.presentation.add_note.AddNoteController
-import com.kotlin_research.kotlinresearch.presentation.notes.recycler.NotePagingAdapter
+import com.kotlin_research.kotlinresearch.presentation.main.add_note.AddNoteController
+import com.kotlin_research.kotlinresearch.presentation.main.notes.recycler.NotePagingAdapter
 import javax.annotation.Nullable
 
 class NotesController : MvpController<NotesContract.View, NotesContract.Presenter>(), NotesContract.View {

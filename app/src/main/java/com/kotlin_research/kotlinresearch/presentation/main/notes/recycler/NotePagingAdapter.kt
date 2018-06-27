@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.presentation.notes.recycler
+package com.kotlin_research.kotlinresearch.presentation.main.notes.recycler
 
 import android.arch.paging.PagedListAdapter
 import android.support.v7.util.DiffUtil
@@ -9,7 +9,7 @@ import com.bluelinelabs.conductor.RouterTransaction
 import com.kotlin_research.kotlinresearch.R
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.domain.format.FormatNote
-import com.kotlin_research.kotlinresearch.presentation.result_note.ResultNoteController
+import com.kotlin_research.kotlinresearch.presentation.main.result_note.ResultNoteController
 
 class NotePagingAdapter(diffCallback: DiffUtil.ItemCallback<Note>, private val router: Router) : PagedListAdapter<Note, NoteViewHolder>(diffCallback) {
 

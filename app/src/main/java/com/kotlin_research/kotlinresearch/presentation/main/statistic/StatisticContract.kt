@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.presentation.statistic
+package com.kotlin_research.kotlinresearch.presentation.main.statistic
 
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter
 import com.hannesdorfmann.mosby3.mvp.MvpView

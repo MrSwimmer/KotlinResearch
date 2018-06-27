@@ -1,10 +1,9 @@
-package com.kotlin_research.kotlinresearch.presentation.result_note
+package com.kotlin_research.kotlinresearch.presentation.auth.sign_in
 
-import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter
 import com.hannesdorfmann.mosby3.mvp.MvpView
 
-interface ResultNoteContract {
+interface CloudContract {
     interface View : MvpView
     interface Presenter : MvpPresenter<View>
 }

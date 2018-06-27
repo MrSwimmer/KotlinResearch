@@ -1,4 +1,4 @@
-package com.kotlin_research.kotlinresearch.presentation.result_note
+package com.kotlin_research.kotlinresearch.presentation.main.result_note
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,15 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.hannesdorfmann.mosby3.mvp.conductor.MvpController
 import com.kotlin_research.kotlinresearch.R
 import com.kotlin_research.kotlinresearch.data.room.Note
 import com.kotlin_research.kotlinresearch.domain.format.FormatNote
-import java.util.logging.Logger
-import kotlin.math.log
 
 class ResultNoteController() : MvpController<ResultNoteContract.View, ResultNoteContract.Presenter>(), ResultNoteContract.View {
 
