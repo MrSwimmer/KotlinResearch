@@ -7,10 +7,10 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.kotlin_research.kotlinresearch"
+        applicationId "com.bignerdranch.android.osm"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 1
+        versionCode 11
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -26,6 +26,9 @@ android {
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
+    }
+    lintOptions {
+        checkReleaseBuilds false
     }
 }
 
@@ -70,4 +73,10 @@ dependencies {
     implementation "android.arch.paging:runtime:1.0.0"
     compile 'com.github.blackfizz:eazegraph:1.2.2@aar'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.vk:androidsdk:1.6.8'
+    compile 'com.kelvinapps:rxfirebase:0.0.15'
+    compile 'com.google.firebase:firebase-auth:16.0.1'
+    compile 'com.google.firebase:firebase-storage:16.0.1'
+
 }
+apply plugin: 'com.google.gms.google-services'

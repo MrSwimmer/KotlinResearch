@@ -11,4 +11,5 @@
     <string name="zone_3">Ярко выраженное напряжение</string>
     <string name="zone_4t"> IV зона («стресса»)</string>
     <string name="zone_4">Сильное напряжение, постоянное пребывание в данной зоне более 3–4 дней не рекомендуется</string>
+    <integer name="com_vk_sdk_AppId">6616650</integer>
 </resources>
