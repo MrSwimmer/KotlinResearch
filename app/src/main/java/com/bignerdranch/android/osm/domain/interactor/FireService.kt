@@ -1,9 +1,11 @@
 package com.bignerdranch.android.osm.domain.interactor
 
 import android.net.Uri
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.kelvinapps.rxfirebase.RxFirebaseAuth
 import com.kelvinapps.rxfirebase.RxFirebaseStorage
@@ -43,6 +45,20 @@ class FireService {
                 .addOnFailureListener({callBack.onError(it)})
     }
 
+    fun isEnter(): Boolean {
+        return auth.currentUser != null
+    }
+
+    fun signOut() {
+        auth.signOut()
+    }
+
+    fun checkOnCloud() {
+        val email = auth.currentUser!!.email
+        Log.i("code",  "on cloud email $email")
+        Log.i("code",  "on cloud storage ${storage.child(email!!)==null}")
+    }
+
     interface AuthCallBack {
         fun onSuccess(success: Boolean)
 
@@ -57,6 +73,12 @@ class FireService {
 
     interface UploadStorageCallBack {
         fun onSuccess(taskSnapshot: UploadTask.TaskSnapshot)
+
+        fun onError(e: Throwable)
+    }
+
+    interface CloudCallBack {
+        fun onSuccess()
 
         fun onError(e: Throwable)
     }

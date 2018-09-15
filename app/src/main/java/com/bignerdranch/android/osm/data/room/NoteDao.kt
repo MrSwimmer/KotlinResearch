@@ -53,6 +53,9 @@ interface NoteDao {
     fun getPageFilterAll(beginPeriod: Long, afterSleep: Boolean, startPosition: Int, loadSize: Int): Single<List<Note>>
 
     //first page
+    @Query("SELECT * FROM notes LIMIT 1")
+    fun checkOnEmpty(): Single<List<Note>>
+
     @Query("SELECT * FROM notes LIMIT :pageSize")
     fun getFirstPage(pageSize: Int): Single<List<Note>>
 

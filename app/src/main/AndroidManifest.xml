@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:name="com.bignerdranch.android.osm.App"
         android:theme="@style/AppTheme">
-        <activity android:name="com.bignerdranch.android.osm.presentation.main.MainActivity">
+        <activity android:name="com.bignerdranch.android.osm.presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.bignerdranch.android.osm.presentation.auth.AuthActivity"/>
+        <activity android:name="com.vk.sdk.VKServiceActivity" android:label="ServiceActivity" android:theme="@style/VK.Transparent" />
     </application>
 </manifest>

@@ -19,7 +19,8 @@
             android:id="@+id/sign_in_email"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="E-mail" />
+            android:hint="E-mail"
+            android:text="mrswimmerlab@gmail.com" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -35,7 +36,8 @@
             android:id="@+id/sign_in_pass"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="Пароль" />
+            android:hint="Пароль"
+            android:text="qwerty" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -82,17 +84,5 @@
             android:text="Регистрация"
             android:textColor="@color/main_red" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/sign_in_skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:text="Пропустить"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
 
 </android.support.constraint.ConstraintLayout>

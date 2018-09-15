@@ -33,4 +33,5 @@ class RoomModule(private var context: Context) {
     fun roomService(dao: NoteDao): RoomService {
         return RoomService(dao)
     }
+
 }

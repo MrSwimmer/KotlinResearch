@@ -7,19 +7,19 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/sign_in_enter2"
+        android:id="@+id/cloud_ready"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_back"
-        android:text="Вход"
+        android:text="готово"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/cloud_radio_group" />
 
     <TextView
         android:id="@+id/textView18"
@@ -30,13 +30,13 @@
         android:text="Облачное хранилище"
         android:textColor="@color/main_red"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintBottom_toTopOf="@+id/cloud_radio_group"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/cloud_radio_group"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

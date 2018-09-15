@@ -120,6 +120,13 @@ class RoomService(var db: NoteDao) {
                 .subscribe(CallBackFabric.getNoteFirstPageCallback(callback))
     }
 
+    fun checkOnEmpty(callback: NotesCallback) {
+        db.checkOnEmpty()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(CallBackFabric.getNoteCallback(callback))
+    }
+
     interface NotesCallback {
         fun onSuccess(notes: List<Note>)
         fun onError(e: Throwable)
