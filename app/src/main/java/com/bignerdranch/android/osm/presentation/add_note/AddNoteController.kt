@@ -73,6 +73,11 @@ class AddNoteController : MvpController<AddNoteContract.View, AddNoteContract.Pr
         router.replaceTopController(RouterTransaction.with(ResultNoteController(note)))
     }
 
+    @OnClick(R.id.gotoWatch)
+    fun onWatchClick() {
+        router.pushController(RouterTransaction.with())
+    }
+
     @OnClick(R.id.add_note_moment_sleep)
     fun onSleepClick() {
         afterSleep = true
