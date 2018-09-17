@@ -61,7 +61,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/add_note_moment_sleep"
+                    android:id="@+id/sleepImage"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     app:layout_constraintEnd_toEndOf="parent"

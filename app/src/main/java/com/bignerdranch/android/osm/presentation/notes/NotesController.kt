@@ -23,6 +23,7 @@ import com.bignerdranch.android.osm.presentation.notes.paging.NoteDiffUtilCallba
 import com.bignerdranch.android.osm.data.room.Note
 import com.bignerdranch.android.osm.presentation.add_note.AddNoteController
 import com.bignerdranch.android.osm.presentation.notes.recycler.NotePagingAdapter
+import kotlinx.android.synthetic.main.controller_notes.view.*
 import javax.annotation.Nullable
 
 class NotesController : MvpController<NotesContract.View, NotesContract.Presenter>(), NotesContract.View {
@@ -31,7 +32,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
     private var currentPeriod = 4
     private var moment = 2
 
-    @BindView(R.id.notes_recycler)
+    /*@BindView(R.id.notes_recycler)
     lateinit var recyclerView: RecyclerView
     @Nullable
     @BindView(R.id.notes_fab)
@@ -40,6 +41,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
     //filter layout
     @BindView(R.id.notes_filter_layout)
     lateinit var filterLayout: ConstraintLayout
+
     @BindView(R.id.notes_period_all)
     lateinit var periodAll: TextView
     @BindView(R.id.notes_period_year)
@@ -57,7 +59,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
 
     //panel open filter panel
     @BindView(R.id.notes_show_hide_image)
-    lateinit var arrowImage: ImageView
+    lateinit var arrowImage: ImageView*/
 
     override fun createPresenter(): NotesContract.Presenter {
         return NotesPresenter()
@@ -65,9 +67,27 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
         val view: View = inflater.inflate(R.layout.controller_notes, container, false)
-        ButterKnife.bind(this, view)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        //ButterKnife.bind(this, view)
+        view.notes_recycler.layoutManager = LinearLayoutManager(activity)
         App.getComponent().inject(this)
+        view.notesFab.setOnClickListener({
+            onFABClick()
+        })
+        view.periodAll.setOnClickListener({
+            onPeriodAllClick()
+        })
+        view.periodYear.setOnClickListener({
+            onPeriodYearClick()
+        })
+        view.periodMonth.setOnClickListener({
+            onPeriodMonthClick()
+        })
+        view.periodWeek.setOnClickListener({
+            onPeriodWeekClick()
+        })
+        view.notes_show_hide_filter.setOnClickListener({
+            onShowFilterClick()
+        })
         return view
     }
 
@@ -76,7 +96,7 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
         updateData()
     }
 
-    @OnClick(R.id.notes_fab)
+    //@OnClick(R.id.notes_fab)
     fun onFABClick() {
         router.pushController(RouterTransaction.with(AddNoteController()))
     }
@@ -84,97 +104,97 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
     override fun setAdapter(pagedList: PagedList<Note>) {
         val adapter = NotePagingAdapter(NoteDiffUtilCallback(), router)
         adapter.submitList(pagedList)
-        recyclerView.adapter = adapter
+        view!!.notes_recycler.adapter = adapter
     }
 
     private fun updateMoment(moment: Int) {
-        momentSleep.setImageResource(R.drawable.ic_alarm_grey)
-        momentTrain.setImageResource(R.drawable.ic_training_grey)
-        momentAll.setImageResource(R.drawable.ic_moment_all_grey)
+        view!!.momentSleep.setImageResource(R.drawable.ic_alarm_grey)
+        view!!.momentTrain.setImageResource(R.drawable.ic_training_grey)
+        view!!.momentAll.setImageResource(R.drawable.ic_moment_all_grey)
         when (moment) {
-            0 -> momentSleep.setImageResource(R.drawable.ic_alarm_red)
-            1 -> momentTrain.setImageResource(R.drawable.ic_training_red)
-            2 -> momentAll.setImageResource(R.drawable.ic_moment_all_red)
+            0 -> view!!.momentSleep.setImageResource(R.drawable.ic_alarm_red)
+            1 -> view!!.momentTrain.setImageResource(R.drawable.ic_training_red)
+            2 -> view!!.momentAll.setImageResource(R.drawable.ic_moment_all_red)
         }
     }
 
     private fun updatePeriod(period: Int) {
         val grey = Color.parseColor("#848484")
         val red = Color.parseColor("#d7443c")
-        periodAll.setTextColor(grey)
-        periodYear.setTextColor(grey)
-        periodMonth.setTextColor(grey)
-        periodWeek.setTextColor(grey)
-        periodAll.textSize = 18f
-        periodYear.textSize = 18f
-        periodMonth.textSize = 18f
-        periodWeek.textSize = 18f
+        view!!.periodAll.setTextColor(grey)
+        view!!.periodYear.setTextColor(grey)
+        view!!.periodMonth.setTextColor(grey)
+        view!!.periodWeek.setTextColor(grey)
+        view!!.periodAll.textSize = 18f
+        view!!.periodYear.textSize = 18f
+        view!!.periodMonth.textSize = 18f
+        view!!.periodWeek.textSize = 18f
         when (period) {
             0 -> {
-                periodAll.setTextColor(red)
-                periodAll.textSize = 21f
+                view!!.periodAll.setTextColor(red)
+                view!!.periodAll.textSize = 21f
             }
             1 -> {
-                periodYear.setTextColor(red)
-                periodYear.textSize = 21f
+                view!!.periodYear.setTextColor(red)
+                view!!.periodYear.textSize = 21f
             }
             2 -> {
-                periodMonth.setTextColor(red)
-                periodMonth.textSize = 21f
+                view!!.periodMonth.setTextColor(red)
+                view!!.periodMonth.textSize = 21f
             }
             3, 4 -> {
-                periodWeek.setTextColor(red)
-                periodWeek.textSize = 21f
+                view!!.periodWeek.setTextColor(red)
+                view!!.periodWeek.textSize = 21f
             }
         }
     }
 
-    @OnClick(R.id.notes_period_all)
+    //@OnClick(R.id.notes_period_all)
     fun onPeriodAllClick() {
-        Log.i("code", periodAll.textSize.toString())
-        if (periodAll.textSize != 42.0f) {
+        Log.i("code", view!!.periodAll.textSize.toString())
+        if (view!!.periodAll.textSize != 42.0f) {
             currentPeriod = 0
             updateData()
         }
     }
 
-    @OnClick(R.id.notes_period_year)
+    //@OnClick(R.id.notes_period_year)
     fun onPeriodYearClick() {
-        if (periodYear.textSize != 42.0f) {
+        if (view!!.periodYear.textSize != 42.0f) {
             currentPeriod = 1
             updateData()
         }
     }
 
-    @OnClick(R.id.notes_period_month)
+    //@OnClick(R.id.notes_period_month)
     fun onPeriodMonthClick() {
-        if (periodMonth.textSize != 42.0f) {
+        if (view!!.periodMonth.textSize != 42.0f) {
             currentPeriod = 2
             updateData()
         }
     }
 
-    @OnClick(R.id.notes_period_week)
+    //@OnClick(R.id.notes_period_week)
     fun onPeriodWeekClick() {
-        if (periodWeek.textSize != 42.0f) {
+        if (view!!.periodWeek.textSize != 42.0f) {
             currentPeriod = 3
             updateData()
         }
     }
 
-    @OnClick(R.id.notes_train_image)
+    //@OnClick(R.id.notes_train_image)
     fun onTrainClick() {
         moment = 1
         updateData()
     }
 
-    @OnClick(R.id.notes_sleep_image)
+    //@OnClick(R.id.notes_sleep_image)
     fun onSleepClick() {
         moment = 0
         updateData()
     }
 
-    @OnClick(R.id.notes_all_image)
+    //@OnClick(R.id.notes_all_image)
     fun onAllClick() {
         moment = 2
         updateData()
@@ -189,15 +209,15 @@ class NotesController : MvpController<NotesContract.View, NotesContract.Presente
             presenter.setRecyclerData(currentPeriod, moment)
     }
 
-    @OnClick(R.id.notes_show_hide_filter)
+    //@OnClick(R.id.notes_show_hide_filter)
     fun onShowFilterClick() {
         if (filter) {
-            filterLayout.visibility = View.GONE
-            arrowImage.setImageResource(R.drawable.ic_arrow_open_filter)
+            view!!.notes_filter_layout.visibility = View.GONE
+            view!!.notes_show_hide_image.setImageResource(R.drawable.ic_arrow_open_filter)
         }
         else {
-            filterLayout.visibility = View.VISIBLE
-            arrowImage.setImageResource(R.drawable.ic_arrow_filter_close)
+            view!!.notes_filter_layout.visibility = View.VISIBLE
+            view!!.notes_show_hide_image.setImageResource(R.drawable.ic_arrow_filter_close)
         }
 
         filter = !filter

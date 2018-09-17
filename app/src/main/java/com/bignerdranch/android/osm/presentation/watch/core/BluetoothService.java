@@ -29,17 +29,20 @@ import io.reactivex.schedulers.Schedulers;
 
 
 public class BluetoothService {
-    public interface BluetoothServiceCallback{
+    public interface BluetoothServiceCallback {
         void recyclerCallingBack(ArrayList<BTDevices> btDevicesArrayList);
+
         void successConnectingCallingBack(BluetoothDevice device);
+
         void failedConnectingCallingBack(BluetoothDevice device);
     }
-    public interface getMessageCallBack{
+
+    public interface getMessageCallBack {
         void successMessage(String msg);
     }
+
     private BluetoothServiceCallback bluetoothServiceCallback;
     private BluetoothAdapter bluetoothAdapter;
-    private App app;
     private UUID uuid = UUID.fromString("056776ca-8ff1-11e8-9eb6-529269fb1459");
     private static ArrayList<BTDevices> btDevicesList = new ArrayList<>();
     private static ArrayList<String> nameDevicesList = new ArrayList<>();
@@ -50,46 +53,46 @@ public class BluetoothService {
             String action = intent.getAction();
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if (nameDevicesList.contains(device.getName())){
+                if (nameDevicesList.contains(device.getName())) {
                     btDevicesList.set(nameDevicesList.indexOf(device.getName()), new BTDevices(device.getName(), device.getAddress(), device));
-                }
-                else{
-                    btDevicesList.add(new BTDevices(device.getName(),device.getAddress(), device));
+                } else {
+                    btDevicesList.add(new BTDevices(device.getName(), device.getAddress(), device));
                     nameDevicesList.add(device.getName());
                 }
                 bluetoothServiceCallback.recyclerCallingBack(btDevicesList);
-                Log.i("TAG",device.getAddress()+" "+device.getName());
-                Log.i("TAG", btDevicesList.size()+"");
+                Log.i("TAG", device.getAddress() + " " + device.getName());
+                Log.i("TAG", btDevicesList.size() + "");
             }
 
         }
     };
-    public BluetoothService(){
-        app = App.instance;
-    }
-    public static void turnOff(){
+
+    public static void turnOff() {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothAdapter.disable();
     }
-    public void registerBluetoothServiceCallBack(BluetoothServiceCallback callback){
+
+    public void registerBluetoothServiceCallBack(BluetoothServiceCallback callback) {
         this.bluetoothServiceCallback = callback;
     }
-    public boolean isEnabled(){
+
+    public boolean isEnabled() {
         boolean isEnabled;
-        if (app.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)){
+        if (App.instance.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
             isEnabled = true;
             bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        }else{
+        } else {
             isEnabled = false;
         }
         return isEnabled;
     }
-    public void turnOn(){
+
+    public void turnOn() {
         bluetoothAdapter.enable();
     }
 
     public void searchDevice() {
-        app.registerReceiver(deviceFoundReceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+        App.instance.registerReceiver(deviceFoundReceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
         bluetoothAdapter.startDiscovery();
     }
 
@@ -107,7 +110,7 @@ public class BluetoothService {
         }
         socket = presocket;
         Single.create((SingleEmitter<BluetoothSocket> emitter) -> {
-            Log.i("TAG", "trying to connect with "+device.getName());
+            Log.i("TAG", "trying to connect with " + device.getName());
             try {
                 socket.connect();
                 if (socket.isConnected()) Log.i("TAG", "socket not null");
@@ -131,8 +134,8 @@ public class BluetoothService {
 
             @Override
             public void onSuccess(BluetoothSocket bluetoothSocket) {
-                Log.i("TAG","OnSuccess");
-                App.appBluetoothSocket=bluetoothSocket;
+                Log.i("TAG", "OnSuccess");
+                App.appBluetoothSocket = bluetoothSocket;
                 bluetoothServiceCallback.successConnectingCallingBack(device);
 
             }
@@ -144,8 +147,8 @@ public class BluetoothService {
         });
     }
 
-    public void getMessage(BluetoothSocket socket, getMessageCallBack callBack){
-        if (socket!=null) {
+    public void getMessage(BluetoothSocket socket, getMessageCallBack callBack) {
+        if (socket != null) {
             final InputStream inputStream;
             InputStream tmpIn = null;
             try {
@@ -206,7 +209,6 @@ public class BluetoothService {
             });
         }
     }
-
 
 
 }

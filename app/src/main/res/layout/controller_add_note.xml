@@ -83,7 +83,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
             <ImageView
-                android:id="@+id/add_note_moment_sleep"
+                android:id="@+id/sleepImage"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -94,7 +94,7 @@
                 app:srcCompat="@drawable/ic_alarm_grey" />
 
             <ImageView
-                android:id="@+id/add_note_moment_training"
+                android:id="@+id/trainImage"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -138,7 +138,7 @@
                     app:srcCompat="@drawable/ic_sitting" />
 
                 <EditText
-                    android:id="@+id/add_note_pulse_sitting"
+                    android:id="@+id/pulseSittingField"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -150,7 +150,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_note_moment_sleep"
+                    app:layout_constraintTop_toBottomOf="@+id/sleepImage"
                     app:layout_constraintVertical_bias="1.0" />
 
             </LinearLayout>
@@ -172,7 +172,7 @@
                     app:srcCompat="@drawable/ic_stand" />
 
                 <EditText
-                    android:id="@+id/add_note_pulse_standing"
+                    android:id="@+id/pulseStandingField"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -184,7 +184,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_note_moment_sleep" />
+                    app:layout_constraintTop_toBottomOf="@+id/sleepImage" />
 
             </LinearLayout>
         </LinearLayout>
@@ -200,7 +200,7 @@
             app:srcCompat="@drawable/ic_watch_black_24dp" />
 
         <ImageView
-            android:id="@+id/add_note_get_result"
+            android:id="@+id/addNote"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
@@ -209,6 +209,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_done" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_notes"
         android:title="Записи" />
     <item
+        android:id="@+id/navigation_action_profile"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="Профиль" />
+    <item
         android:id="@+id/navigation_action_settings"
         android:icon="@drawable/ic_settings"
         android:title="Настройки" />

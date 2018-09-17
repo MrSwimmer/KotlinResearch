@@ -21,7 +21,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/settings_delete_all"
+            android:id="@+id/deleteAll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -47,7 +47,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/settings_save_data"
+            android:id="@+id/saveData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -74,7 +74,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/settings_auth"
+            android:id="@+id/settingsAuth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -100,7 +100,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/settings_set_mark_in_play"
+            android:id="@+id/setMark_in_play"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -126,7 +126,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/settings_version"
+            android:id="@+id/settingsVersion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"

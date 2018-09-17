@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.apollographql.android'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -79,6 +81,7 @@ dependencies {
     compile 'com.google.firebase:firebase-storage:16.0.1'
     compile 'com.vk:androidsdk:1.6.5'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-
+    implementation 'com.apollographql.apollo:apollo-runtime:0.3.2'
+    implementation "com.apollographql.apollo:apollo-android-support:0.3.2"
 }
 apply plugin: 'com.google.gms.google-services'

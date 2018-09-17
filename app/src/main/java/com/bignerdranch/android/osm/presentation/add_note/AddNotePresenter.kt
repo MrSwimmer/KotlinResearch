@@ -3,7 +3,9 @@ package com.bignerdranch.android.osm.presentation.add_note
 import android.util.Log
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter
 import com.bignerdranch.android.osm.App
+import com.bignerdranch.android.osm.data.model.Points
 import com.bignerdranch.android.osm.data.room.Note
+import com.bignerdranch.android.osm.domain.interactor.ApiServiceGraph
 import com.bignerdranch.android.osm.domain.interactor.RoomService
 import javax.inject.Inject
 
@@ -15,6 +17,9 @@ class AddNotePresenter : MvpBasePresenter<AddNoteContract.View>(), AddNoteContra
         App.getComponent().inject(this)
     }
 
+    @Inject
+    lateinit var apiService: ApiServiceGraph
+
     override fun getResult(pulseSitting: String, pulseStanding: String) {
         val x = 2.27
         val y = 0.5
@@ -24,6 +29,26 @@ class AddNotePresenter : MvpBasePresenter<AddNoteContract.View>(), AddNoteContra
         points = i.toDouble() / 100
         val zone = getZone(points)
         view.setRes(points, zone)
+        apiService.setPoints(Points(points.toFloat()), object : ApiServiceGraph.PointsCallback {
+            override fun onSuccess(it: Float) {
+                Log.i("code", "set float points $it")
+            }
+
+            override fun onError(it: Throwable) {
+                Log.i("code", "set float points error ${it.message}")
+            }
+
+        })
+        apiService.getPoints(object : ApiServiceGraph.PointsCallback {
+            override fun onSuccess(it: Float) {
+                Log.i("code", "get float points $it")
+            }
+
+            override fun onError(it: Throwable) {
+                Log.i("code", "get float points error ${it.message}")
+            }
+
+        })
     }
 
     private fun getZone(points: Double): Int {

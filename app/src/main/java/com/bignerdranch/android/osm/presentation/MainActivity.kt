@@ -17,6 +17,7 @@ import com.bignerdranch.android.osm.R
 import com.bignerdranch.android.osm.domain.interactor.ApiService
 import com.bignerdranch.android.osm.domain.interactor.SettingsService
 import com.bignerdranch.android.osm.presentation.auth.AuthController
+import com.bignerdranch.android.osm.presentation.profile.ProfileController
 import com.bignerdranch.android.osm.presentation.settings.NotesController
 import com.bignerdranch.android.osm.presentation.settings.SettingsController
 import com.bignerdranch.android.osm.presentation.statistic.StatisticController
@@ -74,6 +75,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navigation_action_settings -> {
                     router.replaceTopController(RouterTransaction.with(SettingsController()))
+                }
+                R.id.navigation_action_profile -> {
+                    router.replaceTopController(RouterTransaction.with(ProfileController()))
                 }
             }
         }

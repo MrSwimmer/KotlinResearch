@@ -18,6 +18,7 @@ import com.bignerdranch.android.osm.presentation.auth.AuthController
 import com.bluelinelabs.conductor.RouterTransaction
 import javax.inject.Inject
 import com.vk.sdk.VKScope
+import kotlinx.android.synthetic.main.controller_settings.view.*
 
 
 class SettingsController : MvpController<SettingsContract.View, SettingsContract.Presenter>(), SettingsContract.View {
@@ -33,17 +34,27 @@ class SettingsController : MvpController<SettingsContract.View, SettingsContract
     @Inject
     lateinit var settingsService: SettingsService
 
-    @BindView(R.id.settings_auth)
-    lateinit var auth: TextView
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
         val view: View = inflater.inflate(R.layout.controller_settings, container, false)
-        ButterKnife.bind(this, view)
+        //ButterKnife.bind(this, view)
         App.getComponent().inject(this)
+        view.settingsVersion.setOnClickListener({
+            onVersionClick()
+        })
+        view.setMark_in_play.setOnClickListener({
+            onSetMarkClick()
+        })
+        view.settingsAuth.setOnClickListener({
+            onAuthClick()
+        })
+        view.deleteAll.setOnClickListener({
+            onDeleteAllClick()
+        })
+
         return view
     }
 
-    @OnClick(R.id.settings_delete_all)
+    //@OnClick(R.id.settings_delete_all)
     fun onDeleteAllClick() {
         AlertDialog.Builder(activity)
                 .setTitle("Удаление всех записей")
@@ -57,7 +68,7 @@ class SettingsController : MvpController<SettingsContract.View, SettingsContract
                 .show()
     }
 
-    @OnClick(R.id.settings_version)
+    //@OnClick(R.id.settings_version)
     fun onVersionClick() {
         val scope = arrayOf(VKScope.EMAIL)
         //VKSdk.login(activity!!, scope[0])
@@ -73,14 +84,14 @@ class SettingsController : MvpController<SettingsContract.View, SettingsContract
                 .show()
     }
 
-    @OnClick(R.id.settings_set_mark_in_play)
+    //@OnClick(R.id.settings_set_mark_in_play)
     fun onSetMarkClick() {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse("market://details?id=com.bignerdranch.android.OSM")
         startActivity(intent)
     }
 
-    @OnClick(R.id.settings_auth)
+    //@OnClick(R.id.settings_auth)
     fun onAuthClick() {
         signOut()
     }

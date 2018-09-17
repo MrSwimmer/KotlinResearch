@@ -1,0 +1,16 @@
+query SampleQuery() {
+    user(id: 1) {
+        id
+        firstname
+        surname
+        middlename
+        heartPoints
+        gender
+        vkToken
+        phoneNumber
+        firstPhoneNumber
+        secondPhoneNumber
+        mail
+        birthDate
+    }
+}

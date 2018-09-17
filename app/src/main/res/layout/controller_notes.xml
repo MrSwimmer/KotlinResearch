@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/notes_fab"
+        android:id="@+id/notesFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -38,7 +38,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView17">
 
             <ImageView
-                android:id="@+id/notes_sleep_image"
+                android:id="@+id/momentSleep"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
@@ -49,7 +49,7 @@
                 app:srcCompat="@drawable/ic_alarm_grey" />
 
             <ImageView
-                android:id="@+id/notes_train_image"
+                android:id="@+id/momentTrain"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
@@ -59,7 +59,7 @@
                 app:srcCompat="@drawable/ic_training_grey" />
 
             <ImageView
-                android:id="@+id/notes_all_image"
+                android:id="@+id/momentAll"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
@@ -92,7 +92,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView10">
 
             <TextView
-                android:id="@+id/notes_period_all"
+                android:id="@+id/periodAll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -101,7 +101,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/notes_period_year"
+                android:id="@+id/periodYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -110,7 +110,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/notes_period_month"
+                android:id="@+id/periodMonth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,7 +120,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/notes_period_week"
+                android:id="@+id/periodWeek"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

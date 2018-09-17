@@ -16,13 +16,12 @@ class App : Application() {
         fun getComponent(): AppComponent {
             return component
         }
-
         lateinit var appBluetoothSocket: BluetoothSocket
-
     }
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         VKSdk.initialize(applicationContext)
         component = DaggerAppComponent.builder()
                 .sharedPreferencesModule(SharedPreferencesModule(applicationContext))
